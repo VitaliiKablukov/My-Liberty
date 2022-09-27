@@ -1,2 +1,11 @@
 @import './common';
-@import './example';
+@import './base/reset';
+@import './utils/vars';
+@import './utils/mixins';
+@import './utils/visuali-hidden';
+@import './utils/ishidden';
+@import './components/body';
+@import './components/container';
+@import './components/img';
+@import './components/section';
+@import './components/backdrop';

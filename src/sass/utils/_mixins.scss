@@ -1,0 +1,29 @@
+@mixin display($df, $ai, $jc) {
+  display: $df;
+  align-items: $ai;
+  justify-content: $jc;
+}
+@mixin font($fw, $fs, $lh, $ls) {
+  font-weight: $fw;
+  font-size: $fs;
+  line-height: $lh;
+  letter-spacing: $ls;
+}
+@mixin mediamin($width) {
+  @media screen and (min-width: $width) {
+    @content;
+  }
+}
+@mixin mediamax($width) {
+  @media screen and (max-width: $width) {
+    @content;
+  }
+}
+
+// Gallery grid mixin
+@mixin grid($grs, $gre, $gcs, $gce) {
+  grid-row-start: $grs;
+  grid-row-end: $gre;
+  grid-column-start: $gcs;
+  grid-column-end: $gce;
+}
