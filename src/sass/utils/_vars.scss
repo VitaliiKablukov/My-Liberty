@@ -1,3 +1,13 @@
+:root {
+  // logo
+  --logo_icon_color: #ffffff;
+  // text
+  --header_text_color: #ffffff;
+  // header links' underline color
+  --underline_color: #ff001b;
+  //header buttons
+  --btn--colored: #ff6b01;
+}
 
 $transition-time: 250ms;
 $cubic-bezier: cubic-bezier(0.4, 0, 0.2, 1);
