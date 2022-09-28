@@ -1,6 +1,7 @@
 .gallery {
   font-size: 20px;
   line-height: 1.2;
+  margin: 0 auto;
   /* or 120% */
 
   color: #000000;
@@ -10,6 +11,7 @@
 }
 
 .container-gallery {
+  max-width: 1280px;
   margin: 0 20px;
   padding: 20px 0 40px;
   display: flex;
@@ -113,8 +115,8 @@
   }
 
   .container-gallery {
-    margin: 0 32px;
-    padding: 60px 0;
+    margin: 0 auto;
+    padding: 60px 32px;
   }
 }
 
@@ -160,7 +162,7 @@
   .movie-card__info {
     padding-top: 12px;
     font-size: 20px;
-    line-height: (24/20);
+    line-height: 1.2;
   }
 
   .pagination {
