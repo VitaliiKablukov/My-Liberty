@@ -1,11 +1,11 @@
-import { IMG_URL } from "./render-home-page-gallery"
+import { IMG_URL } from "../index"
 import { refs } from "./refs";
 
 export function renderGallery(data, genres, year) {
     const markup = `<li class="gallery-item grid__item" id="${data.id}">
     <a class="movie-card__link grid__link" href="#">
         <img class="movie-card__image"
-            src="${IMG_URL}${data.backdrop_path}" alt="title"
+            src="${IMG_URL}${data.backdrop_path}" alt="${data.original_title}"
             loading="lazy" />
         <div class="movie-card__info">
             <h2 class="movie-card__title">${data.original_title}</h2>
