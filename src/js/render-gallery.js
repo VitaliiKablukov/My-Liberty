@@ -15,8 +15,8 @@ export function renderGallery(data, genres, year) {
             </p>
 
         </div>
-    </a>
-</li>`
+        </a>
+    </li>`
 
     refs.gallery.insertAdjacentHTML('beforeend', markup)
 }
