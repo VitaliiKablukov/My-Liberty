@@ -1,4 +1,4 @@
-import { IMG_URL } from "../index"
+import { IMG_URL } from "./constats"
 import { refs } from "./refs";
 
 export function renderGallery(data, genres) {
@@ -13,7 +13,6 @@ export function renderGallery(data, genres) {
                 ${genres}
                 <span class="info-item info-item__date">| ${data.release_date.substring(0,4)}</span>
             </p>
-
         </div>
         </a>
     </li>`
