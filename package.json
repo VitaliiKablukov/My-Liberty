@@ -5,7 +5,7 @@
   "homepage": "https://VitaliiKablukov.github.io/My-Liberty",
   "scripts": {
     "start": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url /My-Libertye/"
+    "build": "parcel build src/*.html --public-url /My-Liberty/"
   },
   "repository": {
     "type": "git",
