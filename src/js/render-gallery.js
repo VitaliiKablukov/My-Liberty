@@ -1,7 +1,7 @@
 import { IMG_URL } from "./render-home-page-gallery"
 import { refs } from "./refs";
 
-export function renderGallery(data, genres) {
+export function renderGallery(data, genres, year) {
     const markup = `<li class="gallery-item grid__item" id="${data.id}">
     <a class="movie-card__link grid__link" href="#">
         <img class="movie-card__image"
@@ -11,7 +11,7 @@ export function renderGallery(data, genres) {
             <h2 class="movie-card__title">${data.original_title}</h2>
             <p class="movie-card__info-item info-item__genres" id="${data.id}">
                 ${genres}
-                <span class="info-item info-item__date">| 2022</span>
+                <span class="info-item info-item__date">| ${year}</span>
             </p>
 
         </div>

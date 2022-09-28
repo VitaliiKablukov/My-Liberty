@@ -15,6 +15,8 @@ export async function renderHomePageGallery() {
         const genres = payload.data.genres
         genres.map(data => genresArr.push(data.name))
         const genreStr = genresArr.join(', ')
-        renderGallery(film, genreStr)
+        const year = film.release_date.substring(0,4)
+        
+        renderGallery(film, genreStr, year)
     })
 }
