@@ -46,6 +46,8 @@
   font-size: 12px;
   line-height: 1.33;
   text-transform: uppercase;
+  flex-grow: 1;
+  align-content: flex-end;
 }
 .movie-card__title {
   margin: 0;
@@ -105,7 +107,7 @@
 }
 @media screen and (min-width: 320px) {
   .grid__item {
-    min-width: 280px; //280px
+    min-width: 280px;
   }
 }
 @media screen and (min-width: 768px) {
@@ -130,7 +132,7 @@
   }
   .grid__item {
     flex-basis: calc((100% - 32px * 3) / 2);
-    min-width: 368px; //336px+32
+    min-width: 336px;
     margin-bottom: 32px;
   }
   .grid__item:not(:nth-child(2n)) {
@@ -151,7 +153,7 @@
   .grid__item {
     flex-basis: calc((100% - 96px) / 3);
     margin-bottom: 32px;
-    max-width: 411px; //395px+16
+    max-width: 395px; //395px+16
   }
   .grid__item:not(:nth-child(3n)) {
     margin-right: 16px;
