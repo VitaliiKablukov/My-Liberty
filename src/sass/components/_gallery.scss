@@ -61,7 +61,6 @@
     height: 574px;
     width: 395px;
   }
-
 }
 
 .movie-card__info {
@@ -81,7 +80,6 @@
   flex-grow: 1;
   justify-content: space-between;
   align-content: flex-end;
-
 }
 .movie-card__title {
   margin: 0;
@@ -177,7 +175,6 @@
   background-color: #cccccc;
 }
 
-
 .grid__item {
   min-width: 280px; //280px.
   margin-bottom: 20px;
@@ -194,7 +191,6 @@
     margin: 0 auto;
     padding: 60px 32px;
     margin: 0 auto;
-
   }
   .container-gallery {
     padding: 60px 0;
@@ -215,57 +211,55 @@
   .grid__item:not(:nth-child(2n)) {
     margin-right: 32px;
 
-  .grid__item {
-    flex-basis: calc((100% - 32px * 3) / 2);
-    margin-bottom: 32px;
-  }
-  @include mediamax(1279px) {
-    .grid__item:not(:nth-child(2n)) {
-      margin-right: 32px;
+    .grid__item {
+      flex-basis: calc((100% - 32px * 3) / 2);
+      margin-bottom: 32px;
     }
-
-  }
-  .movie-card__info {
-    padding-top: 8px;
-  }
-  .pagination {
-    margin-top: 60px;
-  }
-}
-
-@media screen and (min-width: 1280px) {
-  .container-gallery {
-    width: 1280px;
-    .gallery-list {
-      margin: 0 32px;
+    @include mediamax(1279px) {
+      .grid__item:not(:nth-child(2n)) {
+        margin-right: 32px;
+      }
+    }
+    .movie-card__info {
+      padding-top: 8px;
+    }
+    .pagination {
+      margin-top: 60px;
     }
   }
-  .grid {
-    row-gap: 32px;
-    column-gap: 16px;
-  }
-  .grid__item {
 
-    flex-basis: calc((100% - 32px) / 3);
-    max-width: 395px;
-    margin-bottom: 0;
+  @media screen and (min-width: 1280px) {
+    .container-gallery {
+      width: 1280px;
+      .gallery-list {
+        margin: 0 32px;
+      }
+    }
+    .grid {
+      row-gap: 32px;
+      column-gap: 16px;
+    }
+    .grid__item {
+      flex-basis: calc((100% - 32px) / 3);
+      max-width: 395px;
+      margin-bottom: 0;
 
-    flex-basis: calc((100% - 96px) / 3);
-    margin-bottom: 32px;
-  }
-  .grid__item:not(:nth-child(3n)) {
-    margin-right: 16px;
-
-  }
-  .movie-card__info {
-    padding-top: 12px;
-    font-size: 20px;
-    line-height: 1.2;
-  }
-  .pagination {
-    margin-top: 60px;
-  }
-  .container-gallery {
-    max-width: 1280px;
+      flex-basis: calc((100% - 96px) / 3);
+      margin-bottom: 32px;
+    }
+    .grid__item:not(:nth-child(3n)) {
+      margin-right: 16px;
+    }
+    .movie-card__info {
+      padding-top: 12px;
+      font-size: 20px;
+      line-height: 1.2;
+    }
+    .pagination {
+      margin-top: 60px;
+    }
+    .container-gallery {
+      max-width: 1280px;
+    }
   }
 }
