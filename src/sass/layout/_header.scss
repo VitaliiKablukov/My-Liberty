@@ -1,7 +1,9 @@
 .header {
   position: relative;
   width: 100%;
-  padding: 40px 20px;
+  padding-bottom: 40px;
+  padding-top: 40px;
+
   background-color: red;
   background-image: url('/src/images/bg-mobile.jpg');
   background-repeat: no-repeat;
@@ -44,6 +46,7 @@
 .nav {
   display: flex;
   max-height: 24px;
+
 }
 
 // input--------------------
@@ -68,6 +71,8 @@
 }
 
 .search-field {
+  font-size: 14px;
+  line-height: 1.14;
   width: 100%;
   border: none;
   background-color: transparent;
@@ -136,6 +141,7 @@
 .header-link {
   position: relative;
   color: #ffffff;
+  line-height: 1.17;
 }
 
 .logo-link {
@@ -161,7 +167,15 @@
 .logo-icon {
   width: 24px;
   height: 24px;
-  margin-right: 10px;
+
+  margin-right: 8px;
+}
+
+@media screen and (min-width: 1280px) {
+  .logo-icon {
+    margin-right: 10px;
+  }
+
 }
 
 .header-link.current::after {

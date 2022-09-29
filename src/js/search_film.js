@@ -3,13 +3,16 @@ import { API_KEY, SEARCH_URL } from './constats';
 import { refs } from './refs';
 import { renderGalleryItem } from './render-gallery';
 
-const onFormSubmit = refs.searchForm.addEventListener('submit', onSearchClick);
+// const onFormSubmit = refs.searchForm.addEventListener('submit', onSearchClick);
 
 let searchResult = '';
 
 export async function onSearchClick(e) {
   e.preventDefault();
-  searchResult = e.target.elements.text.value;
+  searchResult = e.target.elements.text.value.trim().toLowerCase();
+  if (!searchResult) {
+    return;
+  }
   const result = await getSearchFilm(searchResult);
   refs.gallery.innerHTML = '';
   renderGalleryItem(result.results);
