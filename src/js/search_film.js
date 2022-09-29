@@ -1,17 +1,18 @@
 import axios from 'axios';
 import { API_KEY, SEARCH_URL } from './constats';
 import { refs } from './refs';
+import { renderGalleryItem } from './render-gallery';
 
-const onFormSubmit = refs.searchForm.addEventListener('submit', evt =>
-  console.log(evt)
-);
+const onFormSubmit = refs.searchForm.addEventListener('submit', onSearchClick);
 
-function onSearchClick(e) {
+let searchResult = '';
+
+export async function onSearchClick(e) {
   e.preventDefault();
-  console.log(e);
-  //   refs.gallery.innerHTML = '';
-  //   const data = getSearchFilm(searchResult);
-  //   console.log(data);
+  searchResult = e.target.elements.text.value;
+  const result = await getSearchFilm(searchResult);
+  refs.gallery.innerHTML = '';
+  renderGalleryItem(result.results);
 }
 
 async function getSearchFilm(searchResult, pageNumber = 1) {
@@ -19,9 +20,9 @@ async function getSearchFilm(searchResult, pageNumber = 1) {
     params: {
       api_key: API_KEY, //unic Key for API.
       query: searchResult, //- Search Value
-      //   page: pageNumber, //: - Number of Pages.
+      page: pageNumber, //: - Number of Pages.
     },
   });
-  console.log(response.data);
+
   return response.data;
 }
