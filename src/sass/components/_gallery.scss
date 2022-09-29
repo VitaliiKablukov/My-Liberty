@@ -46,7 +46,10 @@
   font-size: 12px;
   line-height: 1.33;
   text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
   flex-grow: 1;
+  justify-content: flex-end;
   align-content: flex-end;
 }
 .movie-card__title {
