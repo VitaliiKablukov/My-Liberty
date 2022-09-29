@@ -8,9 +8,12 @@
 .gallery-title {
   position: absolute;
 }
-
+@include mediamax(767px) {
+  .container-gallery {
+    max-width: 480px;
+  }
+}
 .container-gallery {
-  //   margin: 0 20px;
   margin: 0 auto;
   padding: 20px 0 40px;
   display: flex;
@@ -41,7 +44,7 @@
   object-fit: cover;
   display: block;
   min-width: 100%;
-  height: auto;
+  height: 398px;
 }
 .movie-card__info {
   padding-top: 10px;
@@ -52,7 +55,7 @@
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-content: flex-end;
 }
 .movie-card__title {
@@ -111,11 +114,7 @@
 .btn-pag-right:focus {
   background-color: #cccccc;
 }
-@media screen and (min-width: 320px) {
-  .grid__item {
-    min-width: 280px;
-  }
-}
+
 @media screen and (min-width: 768px) {
   .grid {
     display: flex;
@@ -123,25 +122,22 @@
     justify-content: center;
   }
   .container-gallery {
-    // margin: 0 auto;
     padding: 60px 0;
-    // margin: 0 32px;
   }
   .pagination {
     margin-bottom: 60px;
   }
 }
 
-@media screen and (min-width: 768px) and (max-width: 1279px) {
+@media screen and (min-width: 768px) {
   .container-gallery {
-    max-width: 768px;
+    width: 768px;
   }
   .grid {
     margin-bottom: -32px;
   }
   .grid__item {
     flex-basis: calc((100% - 32px * 3) / 2);
-    min-width: 336px;
     margin-bottom: 32px;
   }
   .grid__item:not(:nth-child(2n)) {
@@ -157,7 +153,7 @@
 
 @media screen and (min-width: 1280px) {
   .container-gallery {
-    max-width: 1280px;
+    width: 1280px;
     .gallery-list {
       margin: 0 32px;
     }
@@ -168,7 +164,6 @@
   .grid__item {
     flex-basis: calc((100% - 96px) / 3);
     margin-bottom: 32px;
-    max-width: 395px; //395px+16
   }
   .grid__item:not(:nth-child(3n)) {
     margin-right: 16px;
