@@ -1,5 +1,6 @@
-import { renderHomePageGallery } from "./js/render-home-page-gallery";
+import { renderHomePageGallery } from './js/render-home-page-gallery';
+import { refs } from './js/refs';
+import { onSearchClick } from './js/search_film';
 
-export const IMG_URL = 'https://image.tmdb.org/t/p/w500'
-
-renderHomePageGallery()
+renderHomePageGallery();
+const onFormSubmit = refs.searchForm.addEventListener('submit', onSearchClick);

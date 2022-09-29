@@ -8,23 +8,34 @@
 .gallery-title {
   position: absolute;
 }
-
+@include mediamax(767px) {
+  .container-gallery {
+    max-width: 480px;
+  }
+}
 .container-gallery {
-  margin: 0 20px;
+  margin: 0 auto;
+
   padding: 20px 0 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.gallery-list {
+  margin: 0 20px;
 }
 .grid__item {
   background-color: inherit;
   color: $text-color-h;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 .grid__link {
   display: flex;
   flex-direction: column;
+
   flex-grow: 1;
   transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -36,16 +47,41 @@
 .movie-card__image {
   object-fit: cover;
   display: block;
+
   max-width: 280px;
   height: auto;
+
+  width: 280px;
+  height: 398px;
+  @include mediamin(768px) {
+    height: 455px;
+    width: 336px;
+  }
+  @include mediamin(768px) {
+    height: 574px;
+    width: 395px;
+  }
+
 }
+
 .movie-card__info {
+  @include mediamax(767px) {
+    width: 280px;
+  }
   padding-top: 10px;
   margin: 0;
   font-size: 12px;
   line-height: 1.33;
   text-transform: uppercase;
+
   max-width: 280px;
+
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+  align-content: flex-end;
+
 }
 .movie-card__title {
   margin: 0;
@@ -141,6 +177,7 @@
   background-color: #cccccc;
 }
 
+
 .grid__item {
   min-width: 280px; //280px.
   margin-bottom: 20px;
@@ -150,25 +187,43 @@
   .grid {
     display: flex;
     flex-wrap: wrap;
+
     justify-content: flex-start;
   }
   .container-gallery {
     margin: 0 auto;
     padding: 60px 32px;
     margin: 0 auto;
-    max-width: 768px;
+
+  }
+  .container-gallery {
+    padding: 60px 0;
   }
   .pagination {
     margin-bottom: 60px;
   }
 }
 
-@media screen and (min-width: 768px) and (max-width: 1279px) {
+@media screen and (min-width: 768px) {
+  .container-gallery {
+    width: 768px;
+  }
   .grid {
     margin-bottom: -32px;
   }
+
   .grid__item:not(:nth-child(2n)) {
     margin-right: 32px;
+
+  .grid__item {
+    flex-basis: calc((100% - 32px * 3) / 2);
+    margin-bottom: 32px;
+  }
+  @include mediamax(1279px) {
+    .grid__item:not(:nth-child(2n)) {
+      margin-right: 32px;
+    }
+
   }
   .movie-card__info {
     padding-top: 8px;
@@ -179,14 +234,28 @@
 }
 
 @media screen and (min-width: 1280px) {
+  .container-gallery {
+    width: 1280px;
+    .gallery-list {
+      margin: 0 32px;
+    }
+  }
   .grid {
     row-gap: 32px;
     column-gap: 16px;
   }
   .grid__item {
+
     flex-basis: calc((100% - 32px) / 3);
     max-width: 395px;
     margin-bottom: 0;
+
+    flex-basis: calc((100% - 96px) / 3);
+    margin-bottom: 32px;
+  }
+  .grid__item:not(:nth-child(3n)) {
+    margin-right: 16px;
+
   }
   .movie-card__info {
     padding-top: 12px;

@@ -1,20 +1,38 @@
-import axios from "axios";
-import { renderGallery } from "./render-gallery";
-
-
+import axios from 'axios';
+import { renderGallery } from './render-gallery';
 
 export async function renderHomePageGallery() {
-   const payload = await axios.get('https://api.themoviedb.org/3/trending/movie/day?api_key=7e0fc0f40a1f522dce260b9a97593bef')
-   const films = payload.data.results
+  const genres = await axios.get(
+    'https://api.themoviedb.org/3/genre/movie/list?api_key=7e0fc0f40a1f522dce260b9a97593bef&language=en-US'
+  );
+  const payload = await axios.get(
+    'https://api.themoviedb.org/3/trending/movie/day?api_key=7e0fc0f40a1f522dce260b9a97593bef'
+  );
+  const films = payload.data.results;
+  const genresArr = [];
 
-    films.map(async film =>{
-        const genresArr = []
-        const payload = await axios.get(`
-        https://api.themoviedb.org/3/movie/${film.id}?api_key=7e0fc0f40a1f522dce260b9a97593bef&language=en-US`)
-        const genres = payload.data.genres
-        genres.map(data => genresArr.push(data.name))
-        const genreStr = genresArr.join(', ')
-        
-        renderGallery(film, genreStr)
-    })
+  genres.data.genres.map(genre => {
+    genresArr.push(genre);
+  });
+
+  setGenresToStorage(genresArr);
+
+  const savedGenres = JSON.parse(localStorage.getItem('genres'));
+
+  films.map(film => {
+    const genreArr = [];
+    film.genre_ids.forEach(id => {
+      savedGenres.find(genre => {
+        if (genre.id === id) {
+          genreArr.push(genre.name);
+        }
+      });
+    });
+    const genreStr = genreArr.join(', ');
+    renderGallery(film, genreStr);
+  });
+}
+
+function setGenresToStorage(genresArr) {
+  localStorage.setItem('genres', JSON.stringify(genresArr));
 }
