@@ -8,8 +8,8 @@ export function renderGallery(data, genres) {
             src="${IMG_URL}${data.poster_path}" alt="${data.original_title}"
             loading="lazy" />
         <div class="movie-card__info">
-            <h2 class="movie-card__title">${original_title}</h2>
-            <p class="movie-card__info-item info-item__genres" id="${id}">
+            <h2 class="movie-card__title">${data.original_title}</h2>
+            <p class="movie-card__info-item info-item__genres" id="${data.id}">
                 ${genres}
                 <span class="info-item info-item__date">| ${data.release_date.substring(
                   0,
@@ -22,7 +22,6 @@ export function renderGallery(data, genres) {
 
   refs.gallery.insertAdjacentHTML('beforeend', markup);
 }
-
 
 export function renderGalleryItem(data) {
   const savedGenres = JSON.parse(localStorage.getItem('genres'));
@@ -74,4 +73,3 @@ export function renderGalleryItem(data) {
 
   refs.gallery.insertAdjacentHTML('beforeend', markup);
 }
-
