@@ -1,8 +1,8 @@
 .footer__container {
-    // @media screen and (min-width:320px) and (max-width:786px) {
-    //         display: flex;
-    //         flex-wrap: wrap;
-    //     }
+    @media screen and (min-width:320px) and (max-width:786px) {
+            display: flex;
+            
+        }
     display: flex;
     align-items: center;
     justify-content: center;
@@ -72,7 +72,7 @@
 
 .modal {
     position: absolute;
-    width: 528px;
+    width: 700px;
 
     left: 50%;
     top: 50%;
@@ -130,8 +130,8 @@
 .gallery-list {
     display: flex;
         flex-wrap: wrap;
-        margin-top: calc(-1 * 30px);
-        margin-left: calc(-1 * 30px);
+        // margin-top: calc(-1 * 30px);
+        // margin-left: calc(-1 * 30px);
 }
 
 .gallery-item {
