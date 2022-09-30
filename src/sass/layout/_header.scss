@@ -3,7 +3,6 @@
   width: 100%;
   padding-bottom: 40px;
   padding-top: 40px;
-
   background-color: red;
   background-image: url('/src/images/bg-mobile.jpg');
   background-repeat: no-repeat;
@@ -45,8 +44,6 @@
 
 .nav {
   display: flex;
-  max-height: 24px;
-
 }
 
 // input--------------------
@@ -167,7 +164,6 @@
 .logo-icon {
   width: 24px;
   height: 24px;
-
   margin-right: 8px;
 }
 
@@ -175,7 +171,6 @@
   .logo-icon {
     margin-right: 10px;
   }
-
 }
 
 .header-link.current::after {
