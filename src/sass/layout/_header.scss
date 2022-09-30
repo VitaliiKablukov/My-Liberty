@@ -135,9 +135,8 @@
   text-align: center;
   text-transform: uppercase;
 
-  margin-right: 40px;
-  &:last-child {
-    margin-right: 0;
+  &:nth-child(n + 2) {
+    margin-left: 40px;
   }
 }
 
