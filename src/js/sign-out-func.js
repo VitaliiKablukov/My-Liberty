@@ -12,8 +12,7 @@ function signOut() {
     });
     setTimeout(() => {
       localStorage.removeItem('user');
-      window.location.pathname =
-        'https://vitaliikablukov.github.io/My-Liberty/';
+      window.location.pathname = 'My-Liberty/';
     }, 3000);
   }
 }
