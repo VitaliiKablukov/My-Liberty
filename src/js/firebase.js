@@ -1,11 +1,6 @@
 import { initializeApp } from 'firebase/app';
-import {
-  getAuth,
-  signInWithPopup,
-  GoogleAuthProvider,
-  signInWithRedirect,
-  getRedirectResult,
-} from 'firebase/auth';
+import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { refs } from './refs';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyARmX1k_p6UbG-Vtl1mbdlJrWGlqYHBxn8',
@@ -15,20 +10,31 @@ const firebaseConfig = {
   messagingSenderId: '712438572074',
   appId: '1:712438572074:web:2639e398d98a2bcd91cf53',
 };
-
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
+refs.signInButton.addEventListener('click', googleSignIn);
+refs.signOutButton.addEventListener('click', signOut);
+
 emailVeriying();
 
 function emailVeriying() {
-  const userVerified = JSON.parse(sessionStorage.getItem('user'));
+  const userVerified = JSON.parse(localStorage.getItem('user'));
   if (userVerified) {
-    return;
+    refs.myLibraryNavLink.classList.remove('visually-hidden');
+    refs.signOutButton.classList.remove('visually-hidden');
+    refs.signInButton.classList.add('visually-hidden');
+    console.log(userVerified);
   }
+}
 
-  googleSignIn();
+function signOut() {
+  localStorage.removeItem('user');
+  window.location.pathname = '../index.html';
+  refs.myLibraryNavLink.classList.add('visually-hidden');
+  refs.signOutButton.classList.add('visually-hidden');
+  refs.signInButton.classList.remove('visually-hidden');
 }
 
 function googleSignIn() {
@@ -39,7 +45,11 @@ function googleSignIn() {
       const token = credential.accessToken;
       // The signed-in user info.
       const user = result.user;
-      sessionStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem('user', JSON.stringify(user));
+      refs.myLibraryNavLink.classList.remove('visually-hidden');
+      refs.signOutButton.classList.remove('visually-hidden');
+      refs.signInButton.classList.add('visually-hidden');
+
       // ...
     })
     .catch(error => {
