@@ -2,13 +2,15 @@ import { renderHomePageGallery } from './js/render-home-page-gallery';
 import { refs } from './js/refs';
 import { onSearchClick, getTrendingFilms } from './js/search_film';
 import {renderPaginationBtn, onPaginateBtnClick} from './js/pagination';
-
+import { saveGenresToStorage } from './js/save-genres-to-localStorage';
+saveGenresToStorage()
 // renderHomePageGallery();
 const onFormSubmit = refs.searchForm.addEventListener('submit', onSearchClick);
 refs.pagination.addEventListener('click', onPaginateBtnClick);
 
 document.addEventListener('DOMContentLoaded', () => {
   getPopularInLoadStartPage(1);
+  refs.searchButton.removeAttribute('disabled');
 });
 
 
@@ -29,3 +31,6 @@ async function getPopularInLoadStartPage(page) {
     renderHomePageGallery(page);
 
 }
+
+
+

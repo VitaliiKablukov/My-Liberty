@@ -44,11 +44,16 @@
 
 .nav {
   display: flex;
+  align-items: center;
+
+  max-height: 24px;
+  margin-bottom: 0;
 }
 
 // input--------------------
 .search-box {
   display: flex;
+  flex-direction: column;
   position: relative;
   justify-content: center;
   align-items: center;
@@ -59,6 +64,10 @@
 .input-wrap {
   width: 100%;
   position: relative;
+  @media screen and(min-width: 320px) {
+    max-width: 280px;
+  }
+
   @media screen and(min-width: 768px) {
     max-width: 330px;
   }
@@ -80,12 +89,9 @@
   &::placeholder {
     color: #ffffff;
   }
+
   @media screen and(min-width: 768px) {
-    max-width: 330px;
     margin-bottom: 20px;
-  }
-  @media screen and(min-width: 1280px) {
-    max-width: 400px;
   }
 }
 
@@ -129,9 +135,8 @@
   text-align: center;
   text-transform: uppercase;
 
-  margin-right: 40px;
-  &:last-child {
-    margin-right: 0;
+  &:nth-child(n + 2) {
+    margin-left: 40px;
   }
 }
 
@@ -148,6 +153,7 @@
 
 .logo-link > span {
   display: none;
+  max-height: 24px;
   @media screen and (min-width: 768px) {
     display: flex;
     align-items: center;
@@ -181,4 +187,33 @@
   height: 3px;
   background: #ff001b;
   bottom: -2px;
+}
+
+.search-box-notification {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+
+  display: block;
+  color: #ff001b;
+  position: absolute;
+  z-index: 999;
+  bottom: -30px;
+  max-width: 280px;
+
+  // top: 0px;
+
+  @media screen and(min-width: 768px) {
+    bottom: -10px;
+    max-width: 394px;
+  }
+  @media screen and(min-width: 1280px) {
+  }
+}
+
+.nav__btn {
+  margin-left: 40px;
+  cursor: pointer;
 }
