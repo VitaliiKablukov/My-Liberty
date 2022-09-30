@@ -64,6 +64,10 @@
 .input-wrap {
   width: 100%;
   position: relative;
+  @media screen and(min-width: 320px) {
+    max-width: 280px;
+  }
+
   @media screen and(min-width: 768px) {
     max-width: 330px;
   }
@@ -85,12 +89,9 @@
   &::placeholder {
     color: #ffffff;
   }
+
   @media screen and(min-width: 768px) {
-    max-width: 330px;
     margin-bottom: 20px;
-  }
-  @media screen and(min-width: 1280px) {
-    max-width: 400px;
   }
 }
 
@@ -190,14 +191,26 @@
 }
 
 .search-box-notification {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+
   display: block;
   color: #ff001b;
+  position: absolute;
+  z-index: 999;
+  bottom: -30px;
+  max-width: 280px;
+
+  // top: 0px;
+
   @media screen and(min-width: 768px) {
-    max-width: 330px;
-    margin-bottom: 20px;
+    bottom: -10px;
+    max-width: 394px;
   }
   @media screen and(min-width: 1280px) {
-    max-width: 400px;
   }
 }
 
