@@ -44,6 +44,10 @@
 
 .nav {
   display: flex;
+  align-items: center;
+
+  max-height: 24px;
+  margin-bottom: 0;
 }
 
 // input--------------------
@@ -149,6 +153,7 @@
 
 .logo-link > span {
   display: none;
+  max-height: 24px;
   @media screen and (min-width: 768px) {
     display: flex;
     align-items: center;
@@ -194,4 +199,9 @@
   @media screen and(min-width: 1280px) {
     max-width: 400px;
   }
+}
+
+.nav__btn {
+  margin-left: 40px;
+  cursor: pointer;
 }
