@@ -50,9 +50,9 @@ export function renderGalleryItem(data) {
       return (
         acc +
         `<li class="gallery-item grid__item" id="${id}">
-    <a class="movie-card__link grid__link" data-img="${poster_path}"  href="#">
+    <a class="movie-card__link grid__link" data-img="${backdrop_path}"  href="#">
         <img class="movie-card__image"
-            src="${IMG_URL}${backdrop_path}" alt="${original_title}"
+            src="${IMG_URL}${poster_path}" alt="${original_title}"
             loading="lazy" />
         <div class="movie-card__info">
             <h2 class="movie-card__title">${original_title}</h2>

@@ -6,14 +6,16 @@ import { renderGalleryItem } from './render-gallery';
 // const onFormSubmit = refs.searchForm.addEventListener('submit', onSearchClick);
 
 let searchResult = '';
-document.addEventListener('load', () =>
-  refs.searchButton.removeAttribute('disabled')
-);
+
 export async function onSearchClick(e) {
   e.preventDefault();
   searchResult = e.target.elements.text.value.trim().toLowerCase();
   if (!searchResult) {
+    refs.searchErrorNotification.classList.remove('visually-hidden');
     return;
+  }
+  if (!refs.searchErrorNotification.classList.contains('visually-hidden')) {
+    refs.searchErrorNotification.classList.add('visually-hidden');
   }
   const result = await getSearchFilm(searchResult);
   refs.gallery.innerHTML = '';
