@@ -8,7 +8,7 @@ saveGenresToStorage()
 // renderHomePageGallery();
 const onFormSubmit = refs.searchForm.addEventListener('submit', onSearchClick);
 refs.pagination.addEventListener('click', onPaginateBtnClick);
-
+refs.gallery.addEventListener("click", renderModal)
 document.addEventListener('DOMContentLoaded', () => {
   getPopularInLoadStartPage(1);
   refs.searchButton.removeAttribute('disabled');
