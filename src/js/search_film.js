@@ -6,7 +6,9 @@ import { renderGalleryItem } from './render-gallery';
 // const onFormSubmit = refs.searchForm.addEventListener('submit', onSearchClick);
 
 let searchResult = '';
-
+document.addEventListener('load', () =>
+  refs.searchButton.removeAttribute('disabled')
+);
 export async function onSearchClick(e) {
   e.preventDefault();
   searchResult = e.target.elements.text.value.trim().toLowerCase();
