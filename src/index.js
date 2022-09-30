@@ -3,11 +3,12 @@ import { refs } from './js/refs';
 import { onSearchClick, getTrendingFilms } from './js/search_film';
 import {renderPaginationBtn, onPaginateBtnClick} from './js/pagination';
 import { saveGenresToStorage } from './js/save-genres-to-localStorage';
+import { renderModal } from "./js/render-modal"
 saveGenresToStorage()
 // renderHomePageGallery();
 const onFormSubmit = refs.searchForm.addEventListener('submit', onSearchClick);
 refs.pagination.addEventListener('click', onPaginateBtnClick);
-
+refs.gallery.addEventListener("click", renderModal)
 document.addEventListener('DOMContentLoaded', () => {
   getPopularInLoadStartPage(1);
   refs.searchButton.removeAttribute('disabled');
