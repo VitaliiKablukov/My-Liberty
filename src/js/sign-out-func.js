@@ -9,6 +9,7 @@ function signOut() {
     Notify.info('You had signed out', {
       width: '400px',
       cssAnimationStyle: 'from-right',
+      position: 'right-bottom',
     });
     setTimeout(() => {
       localStorage.removeItem('user');
