@@ -10,14 +10,16 @@ let searchResult = '';
 export async function onSearchClick(e) {
   e.preventDefault();
   searchResult = e.target.elements.text.value.trim().toLowerCase();
-  if (!searchResult) {
+
+  const result = await getSearchFilm(searchResult);
+
+  if (!result.results.length) {
     refs.searchErrorNotification.classList.remove('visually-hidden');
     return;
   }
   if (!refs.searchErrorNotification.classList.contains('visually-hidden')) {
     refs.searchErrorNotification.classList.add('visually-hidden');
   }
-  const result = await getSearchFilm(searchResult);
   refs.gallery.innerHTML = '';
   renderGalleryItem(result.results);
 }

@@ -6,5 +6,4 @@ renderHomePageGallery();
 const onFormSubmit = refs.searchForm.addEventListener('submit', onSearchClick);
 document.addEventListener('DOMContentLoaded', () => {
   refs.searchButton.removeAttribute('disabled');
-  console.log(' ser      ', refs.searchErrorNotification);
 });

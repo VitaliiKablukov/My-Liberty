@@ -49,6 +49,7 @@
 // input--------------------
 .search-box {
   display: flex;
+  flex-direction: column;
   position: relative;
   justify-content: center;
   align-items: center;
@@ -181,4 +182,16 @@
   height: 3px;
   background: #ff001b;
   bottom: -2px;
+}
+
+.search-box-notification {
+  display: block;
+  color: #ff001b;
+  @media screen and(min-width: 768px) {
+    max-width: 330px;
+    margin-bottom: 20px;
+  }
+  @media screen and(min-width: 1280px) {
+    max-width: 400px;
+  }
 }
