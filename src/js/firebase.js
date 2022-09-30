@@ -34,6 +34,7 @@ function signOut() {
   Notify.info('You had signed out', {
     width: '400px',
     cssAnimationStyle: 'from-right',
+    position: 'right-bottom',
   });
 
   setTimeout(() => {
@@ -62,6 +63,7 @@ function googleSignIn() {
       Notify.success('You had successfully signed in', {
         width: '400px',
         cssAnimationStyle: 'from-right',
+        position: 'right-bottom',
       });
 
       // ...
