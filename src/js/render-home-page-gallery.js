@@ -1,13 +1,12 @@
 import axios from 'axios';
 import { renderGallery } from './render-gallery';
 
-export async function renderHomePageGallery() {
+export async function renderHomePageGallery(page) {
   const genres = await axios.get(
     'https://api.themoviedb.org/3/genre/movie/list?api_key=7e0fc0f40a1f522dce260b9a97593bef&language=en-US'
   );
   const payload = await axios.get(
-    'https://api.themoviedb.org/3/trending/movie/day?api_key=7e0fc0f40a1f522dce260b9a97593bef'
-  );
+    `https://api.themoviedb.org/3/trending/movie/day?api_key=7e0fc0f40a1f522dce260b9a97593bef&page=${page}`  );
   const films = payload.data.results;
   const genresArr = [];
 
