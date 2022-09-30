@@ -10,7 +10,7 @@ import { getTrendingFilms } from './search_film';
     const per_page_max = e;
     
     console.log('renderPaginationBtn page - ', page);
-    let current_page=page;
+    let current_page=Number(page);
     
     
     
@@ -31,7 +31,7 @@ import { getTrendingFilms } from './search_film';
         if (activeBtn) liPagin.classList.add('pag-activ');
         
 
-         liPagin.disabled = activeBtn;
+        liPagin.disabled = activeBtn;
         liPagin.innerHTML = i;
         liPagin.addEventListener('click', () => {
             current_page = i;
@@ -116,10 +116,6 @@ export async function onPaginateBtnClick(e) {
     
     renderHomePageGallery(pageNum);
     renderPaginationBtn(max_page, pageNum);
-    if (document.querySelectorAll('.pagination-list-item').id = pageNum) {
-        
-         document.getElementById(`${pageNum}`).classList.add('pag-activ');
-            console.log('.pag-activ', document.querySelector('.pag-activ'));
-            }
+    
           
 }
