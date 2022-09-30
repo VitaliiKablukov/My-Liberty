@@ -42,7 +42,7 @@ function signOut() {
     refs.signOutButton.classList.add('visually-hidden');
     refs.signInButton.classList.remove('visually-hidden');
 
-    window.location.pathname = 'https://vitaliikablukov.github.io/My-Liberty/';
+    window.location.pathname = 'My-Liberty/';
   }, 3000);
 }
 
