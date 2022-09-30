@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { refs } from './refs';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyARmX1k_p6UbG-Vtl1mbdlJrWGlqYHBxn8',
@@ -30,11 +31,19 @@ function emailVeriying() {
 }
 
 function signOut() {
-  localStorage.removeItem('user');
-  window.location.pathname = '../index.html';
-  refs.myLibraryNavLink.classList.add('visually-hidden');
-  refs.signOutButton.classList.add('visually-hidden');
-  refs.signInButton.classList.remove('visually-hidden');
+  Notify.info('You had signed out', {
+    width: '400px',
+    cssAnimationStyle: 'from-right',
+  });
+
+  setTimeout(() => {
+    localStorage.removeItem('user');
+    refs.myLibraryNavLink.classList.add('visually-hidden');
+    refs.signOutButton.classList.add('visually-hidden');
+    refs.signInButton.classList.remove('visually-hidden');
+
+    window.location.pathname = 'https://vitaliikablukov.github.io/My-Liberty/';
+  }, 3000);
 }
 
 function googleSignIn() {
@@ -49,6 +58,11 @@ function googleSignIn() {
       refs.myLibraryNavLink.classList.remove('visually-hidden');
       refs.signOutButton.classList.remove('visually-hidden');
       refs.signInButton.classList.add('visually-hidden');
+      console.log(user);
+      Notify.success('You had successfully signed in', {
+        width: '400px',
+        cssAnimationStyle: 'from-right',
+      });
 
       // ...
     })
