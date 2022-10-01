@@ -8,8 +8,9 @@ export const refs = {
   signOutButton: document.querySelector('.js-nav__btn--signOut'),
   myLibraryNavLink: document.querySelector('.js-library-link'),
 
-  buttonModalClose: document.querySelector("[data-modalfilm-close]"),
-  backdropEl: document.querySelector(".backdrop-film"),
-  modalFilm: document.querySelector(".modal-film"),
-  renderModalBox: document.querySelector(".modal-render-box")
+  buttonModalClose: document.querySelector('[data-modalfilm-close]'),
+  backdropEl: document.querySelector('.backdrop-film'),
+  modalFilm: document.querySelector('.modal-film'),
+  renderModalBox: document.querySelector('.modal-render-box'),
+  headerOnMainPage: document.querySelector('.header'),
 };
