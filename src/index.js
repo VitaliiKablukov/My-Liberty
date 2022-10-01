@@ -4,6 +4,8 @@ import { onSearchClick, getTrendingFilms } from './js/search_film';
 import { renderPaginationBtn, onPaginateBtnClick } from './js/pagination';
 import { saveGenresToStorage } from './js/save-genres-to-localStorage';
 import { renderModal } from './js/render-modal';
+import { addSelectedFilm } from './js/add-library';
+
 saveGenresToStorage();
 // renderHomePageGallery();
 if (refs.headerOnMainPage) {

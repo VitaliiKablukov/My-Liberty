@@ -1,21 +1,32 @@
-import axios from "axios";
-import { IMG_URL, API_KEY, SEARCH_URL } from "./constats"
-import { refs } from "./refs"
+import axios from 'axios';
+import { IMG_URL, API_KEY, SEARCH_URL } from './constats';
+import { refs } from './refs';
+import { addFilmToLocalStorage } from './add-library';
+import { checkRepeatFilm } from './add-library';
+import { settingRenderModalBtn } from './add-library';
 
 export async function renderModal(event) {
-    event.preventDefault()
-    if(!event.target.closest(".gallery-item")){
-        return
-    }
-    window.addEventListener("keydown", onEscClose)
-    refs.backdropEl.classList.remove("is-hidden")
-    let itemId = event.target.closest(".gallery-item").getAttribute("id");
+  event.preventDefault();
+  if (!event.target.closest('.gallery-item')) {
+    return;
+  }
+  window.addEventListener('keydown', onEscClose);
+  refs.backdropEl.classList.remove('is-hidden');
+  let itemId = event.target.closest('.gallery-item').getAttribute('id');
 
-    const fetchChoosenFilm = await axios.get(`https://api.themoviedb.org/3/movie/${itemId}?api_key=7e0fc0f40a1f522dce260b9a97593bef&language=en-US`)
-    const filmForModal = fetchChoosenFilm.data
-    const genresFilm = Object.values(filmForModal.genres)[0].name;
+  const fetchChoosenFilm = await axios.get(
+    `https://api.themoviedb.org/3/movie/${itemId}?api_key=7e0fc0f40a1f522dce260b9a97593bef&language=en-US`
+  );
+  const filmForModal = fetchChoosenFilm.data;
+  const genresFilm = Object.values(filmForModal.genres)[0].name;
 
-    const modalLayout = `<div class="img-box"><img class="film_modal_img" src="${IMG_URL}${filmForModal.poster_path}" alt="${filmForModal.original_title}" /></div>
+  checkRepeatFilm(
+    refs.filmOfLocalStoragWatched,
+    refs.filmOfLocalStoragQueue,
+    itemId
+  );
+
+  const modalLayout = `<div class="img-box"><img class="film_modal_img" src="${IMG_URL}${filmForModal.poster_path}" alt="${filmForModal.original_title}" /></div>
     <div class="modal__content">
       <h1 class="film_modal_title">${filmForModal.title}</h1>
       <ul class="film_info_list">
@@ -34,33 +45,33 @@ export async function renderModal(event) {
       <h2 class="modal_about_head">About</h2>
       <p class="modal_about_text">${filmForModal.overview}</p>
       <ul class="modal_btn_list">
-          <li class="modal_btn_item"><button class="modal_btn" type="button">add to Watched</button></li>
-          <li class="modal_btn_item"><button class="modal_btn" type="button">add to queue</button></li>
+          <li class="modal_btn_item"><button class="modal_btn" type="button" >${settingRenderModalBtn.nameWatchedBtn}</button></li>
+          <li class="modal_btn_item"><button class="modal_btn" type="button" >${settingRenderModalBtn.nameQueueBtn}</button></li>
       </ul>
-    </div>`
-    
-    refs.renderModalBox.insertAdjacentHTML("beforeend", modalLayout)
+    </div>`;
+
+  refs.renderModalBox.insertAdjacentHTML('beforeend', modalLayout);
+
+  addFilmToLocalStorage(filmForModal);
 }
 
-refs.buttonModalClose.addEventListener("click", onModalButtonClose)
-refs.backdropEl.addEventListener("click", onBackdropClose)
+refs.buttonModalClose.addEventListener('click', onModalButtonClose);
+refs.backdropEl.addEventListener('click', onBackdropClose);
 
 function onModalButtonClose() {
-    refs.backdropEl.classList.add("is-hidden")
-    refs.renderModalBox.innerHTML = ""
+  refs.backdropEl.classList.add('is-hidden');
+  refs.renderModalBox.innerHTML = '';
 }
 
 function onEscClose(event) {
-    if(event.code === "Escape") {
-        window.removeEventListener("keydown", onEscClose)
-        onModalButtonClose()
-    }
+  if (event.code === 'Escape') {
+    window.removeEventListener('keydown', onEscClose);
+    onModalButtonClose();
+  }
 }
 
 function onBackdropClose(event) {
-if(event.currentTarget === event.target) {
-    onModalButtonClose()
+  if (event.currentTarget === event.target) {
+    onModalButtonClose();
+  }
 }
-}
-
-
