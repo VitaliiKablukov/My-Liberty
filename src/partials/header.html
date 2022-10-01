@@ -1,17 +1,58 @@
 <header class="header">
-<div class="container">
-  <nav class="nav">
-  <a href="./index.html" class="logo-link link"
-    ><svg class="logo-icon"><use href="./images/symbol-defs.svg#icon-film"></use></svg><span>Filmoteka</span></a>
-    <ul class="header-list list">
-        <li class="header-item"><a href="./index.html" class="header-link link current">home</a></li>
-        <li class="header-item"><a href="./my-library.html" class="header-link link">my library</a></li>
-    </ul>
-</div>
-<form class="search-box">
-    <label for="input-search" class="label-search"></label>
-    <span class="input-wrap"><input type="text" name="text" class="search-field" id#input-search placeholder="Movie search" ><button type="submit" class="search-button" disabled data-search-button>
-      <svg class="search-icon"><use href="./images/symbol-defs.svg#icon-search"></use></svg></button>
-    </span></nav>
-  </form>  
+  <div class="container">
+    <nav class="nav">
+      <a href="./index.html" class="logo-link link"
+        ><svg class="logo-icon">
+          <use href="./images/symbol-defs.svg#icon-film"></use>
+        </svg>
+        <span>Filmoteka</span></a
+      >
+      <ul class="header-list list">
+        <li class="header-item">
+          <a href="./index.html" class="header-link link current">home</a>
+        </li>
+        <li class="header-item">
+          <a
+            href="./my-library.html"
+            class="js-library-link header-link link visually-hidden"
+            >my library</a
+          >
+        </li>
+      </ul>
+      <button type="button" class="nav__btn js-nav__btn--signIn">
+        Sign In
+      </button>
+      <button
+        type="button"
+        class="nav__btn js-nav__btn--signOut visually-hidden"
+      >
+        Sign Out
+      </button>
+    </nav>
+
+    <form class="search-box">
+      <label for="input-search" class="label-search"></label>
+      <span class="input-wrap"
+        ><input
+          type="text"
+          name="text"
+          class="search-field"
+          id#input-search
+          placeholder="Movie search"
+        /><button
+          type="submit"
+          class="search-button"
+          disabled
+          data-search-button
+        >
+          <svg class="search-icon">
+            <use href="./images/symbol-defs.svg#icon-search"></use>
+          </svg>
+        </button>
+      </span>
+      <p class="search-box-notification visually-hidden">
+        Search result not successful. Enter the correct movie name
+      </p>
+    </form>
+  </div>
 </header>

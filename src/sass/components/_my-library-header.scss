@@ -68,6 +68,8 @@
   display: flex;
   align-items: center;
 
+  margin-right: auto;
+
   &::after {
     content: 'Filmoteka';
     font-family: 'Roboto';
@@ -108,6 +110,23 @@
   color: var(--header_text_color);
 
   position: relative;
+}
+
+.nav__btn {
+  border: none;
+  background-color: transparent;
+  color: var(--header_text_color);
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.166;
+  text-transform: uppercase;
+
+  padding-left: 0;
+  padding-right: 0;
+
+  cursor: pointer;
 }
 
 .buttons-list {
