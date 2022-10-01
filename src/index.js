@@ -3,9 +3,14 @@ import { refs } from './js/refs';
 import { onSearchClick } from './js/search_film';
 import { saveGenresToStorage } from './js/save-genres-to-localStorage';
 
-saveGenresToStorage()
+saveGenresToStorage();
 renderHomePageGallery();
-const onFormSubmit = refs.searchForm.addEventListener('submit', onSearchClick);
+
 document.addEventListener('DOMContentLoaded', () => {
   refs.searchButton.removeAttribute('disabled');
+  const onFormSubmit = refs.searchForm.addEventListener(
+    'submit',
+    onSearchClick
+  );
+  console.log(document);
 });

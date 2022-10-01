@@ -12,7 +12,7 @@ export async function onSearchClick(e) {
   searchResult = e.target.elements.text.value.trim().toLowerCase();
 
   const result = await getSearchFilm(searchResult);
-
+  console.log(result);
   if (!result.results.length) {
     refs.searchErrorNotification.classList.remove('visually-hidden');
     return;
