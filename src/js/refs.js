@@ -12,4 +12,5 @@ export const refs = {
   backdropEl: document.querySelector('.backdrop-film'),
   modalFilm: document.querySelector('.modal-film'),
   renderModalBox: document.querySelector('.modal-render-box'),
+  headerOnMainPage: document.querySelector('.header'),
 };
