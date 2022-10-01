@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { API_KEY, SEARCH_URL,TREND_URL } from './constats';
+import { API_KEY, SEARCH_URL, TREND_URL } from './constats';
 import { refs } from './refs';
 import { renderGalleryItem } from './render-gallery';
 
@@ -10,7 +10,9 @@ let searchResult = '';
 export async function onSearchClick(e) {
   e.preventDefault();
   searchResult = e.target.elements.text.value.trim().toLowerCase();
-
+  if (!searchResult) {
+    return;
+  }
   const result = await getSearchFilm(searchResult);
   console.log(result);
   if (!result.results.length) {
@@ -37,17 +39,15 @@ async function getSearchFilm(searchResult, pageNumber = 1) {
 }
 
 export async function getTrendingFilms(pageNumber = 1) {
-  
-  
   const response = await axios.get(TREND_URL, {
     params: {
       api_key: API_KEY, //unic Key for API.
       page: pageNumber, //: - Number of Pages.
     },
   });
-    
+
   if (!response.ok) {
-      console.log('error',response.status);
-    }
+    console.log('error', response.status);
+  }
   return response.data;
 }

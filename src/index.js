@@ -6,12 +6,18 @@ import { saveGenresToStorage } from './js/save-genres-to-localStorage';
 import { renderModal } from './js/render-modal';
 saveGenresToStorage();
 // renderHomePageGallery();
-const onFormSubmit = refs.searchForm.addEventListener('submit', onSearchClick);
+if (refs.headerOnMainPage) {
+  const onFormSubmit = refs.searchForm.addEventListener(
+    'submit',
+    onSearchClick
+  );
+  refs.searchButton.removeAttribute('disabled');
+}
+
 refs.pagination.addEventListener('click', onPaginateBtnClick);
 refs.gallery.addEventListener('click', renderModal);
 document.addEventListener('DOMContentLoaded', () => {
   getPopularInLoadStartPage(1);
-  refs.searchButton.removeAttribute('disabled');
 });
 
 async function getPopularInLoadStartPage(page) {
