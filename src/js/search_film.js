@@ -2,7 +2,7 @@ import axios from 'axios';
 import { API_KEY, SEARCH_URL,TREND_URL } from './constats';
 import { refs } from './refs';
 import { renderGalleryItem } from './render-gallery';
-
+import { displayPagination } from './pagination';
 // const onFormSubmit = refs.searchForm.addEventListener('submit', onSearchClick);
 
 let searchResult = '';
@@ -51,14 +51,24 @@ export async function getTrendingFilms(pageNumber = 1) {
   return response.data;
 }
 
-export function getSearchWithPagination(page) {
+export async function getSearchWithPagination(page) {
    // вимальовуємо фільми за пошуком 
-  onSearchClick(e, page);
-  //вимальовуємо пагінацію
-  // paginationSearch(searchResult, page);
+  const result = await getSearchFilm(searchResult, page);
+
+  if (!result.results.length) {
+    refs.searchErrorNotification.classList.remove('visually-hidden');
+    return;
+  }
+  if (!refs.searchErrorNotification.classList.contains('visually-hidden')) {
+    refs.searchErrorNotification.classList.add('visually-hidden');
+  }
+  refs.gallery.innerHTML = '';
+  console.log('result.results',result.results);
+  renderGalleryItem(result.results);
+  paginationSearch(searchResult, page);
 }
 
-async function paginationSearch(searchResult, page) {
+async function paginationSearch(searchData, page) {
   let UlPagin=refs.paginationList;
   if (UlPagin.classList.contains('pagination-popular')||UlPagin.classList.contains('pagination-watched')||UlPagin.classList.contains('pagination-queue')) {
     UlPagin.classList.remove('pagination-popular');
@@ -66,14 +76,13 @@ async function paginationSearch(searchResult, page) {
     UlPagin.classList.remove('pagination-queue');
     UlPagin.classList.add('pagination-search');
   }
-  refs.paginationSearch.innerHTML = '';
+  
     const searchFilms =await getSearchFilm(searchData, page).then(data => data);
     const max_page = searchFilms.total_pages;
     console.log('max_page Search', max_page);
     if (page > max_page) {
       return;
     }
-   displayPagination(max_page=100, page);
+   displayPagination(max_page, page);
 }
-
 // pagination end

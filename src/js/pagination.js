@@ -92,7 +92,7 @@ import { getTrendingFilms, getSearchWithPagination } from './search_film';
     } 
     const trendsFilms =await getTrendingFilms(page).then(data => data);
     const max_page = trendsFilms.total_pages;
-    console.log('max_page', max_page);
+    // console.log('max_page', max_page);
     if (page > max_page) {
       return;
     }
