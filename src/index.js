@@ -4,6 +4,8 @@ import { onSearchClick, getTrendingFilms } from './js/search_film';
 import { renderPaginationBtn, onPaginateBtnClick } from './js/pagination';
 import { saveGenresToStorage } from './js/save-genres-to-localStorage';
 import { renderModal } from './js/render-modal';
+import { showCardsLoader, hideCardsLoader } from './js/loader'
+
 saveGenresToStorage();
 // renderHomePageGallery();
 if (refs.headerOnMainPage) {
@@ -17,7 +19,11 @@ if (refs.headerOnMainPage) {
 refs.pagination.addEventListener('click', onPaginateBtnClick);
 refs.gallery.addEventListener('click', renderModal);
 document.addEventListener('DOMContentLoaded', () => {
-  getPopularInLoadStartPage(1);
+  showCardsLoader()
+  setTimeout(() => {
+    getPopularInLoadStartPage(1);
+    hideCardsLoader()
+  }, 1000);
 });
 
 async function getPopularInLoadStartPage(page) {
