@@ -1,4 +1,4 @@
-.header {
+.my-library-header {
   min-width: 320px;
 
   padding-top: 40px;
@@ -127,6 +127,9 @@
   padding-right: 0;
 
   cursor: pointer;
+  &:focus {
+    outline: none;
+  }
 }
 
 .buttons-list {
@@ -160,6 +163,7 @@
   color: var(--header_text_color);
 
   border-radius: 6px;
+  cursor: pointer;
 }
 
 .btn--colored {
