@@ -10,11 +10,9 @@
 }
 
 .container-gallery {
-  margin: 0 20px;
-  padding: 20px 0 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  padding-top: 20px;
+  padding-bottom: 40px;
+  margin-top: -32px;
 }
 .grid__item {
   background-color: inherit;
@@ -33,12 +31,22 @@
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06),
     1px 4px 6px rgba(0, 0, 0, 0.16);
 }
-.movie-card__image {
-  object-fit: cover;
-  display: block;
-  max-width: 280px;
-  height: auto;
+@media screen and (max-width: 480px) {
+  .movie-card__image {
+    object-fit: cover;
+    display: block;
+    min-width: 280px;
+    height: auto;
+  }
 }
+@media screen and (min-width: 480px) and (max-width: 767px) {
+  .movie-card__image {
+    object-fit: cover;
+    display: block;
+    height: auto;
+  }
+}
+
 .movie-card__info {
   padding-top: 10px;
   margin: 0;
@@ -64,7 +72,9 @@
 
 @media screen and (min-width: 768px) {
   .movie-card__image {
-    max-width: 336px;
+    width: 336px;
+    min-height: 455px;
+    max-height: 455px;
   }
   .movie-card__info {
     max-width: 336px;
@@ -76,7 +86,10 @@
 
 @media screen and (min-width: 1280px) {
   .movie-card__image {
-    max-width: 395px;
+    width: 395px;
+    min-height: 574px;
+    max-height: 574px;
+    flex: 2 1 auto;
   }
   .movie-card__info {
     max-width: 395px;
@@ -90,7 +103,16 @@
     line-height: 1.2;
   }
 }
-
+.gallery-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+@media screen and (min-width: 768px) {
+  .gallery-list {
+    flex-direction: row;
+  }
+}
 /*--------------pagination--------------------*/
 .pagination {
   width: 100%;
@@ -151,11 +173,13 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
+    align-items: stretch;
   }
   .container-gallery {
-    margin: 0 auto;
-    padding: 60px 32px;
-    margin: 0 auto;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    margin-left: auto;
+    margin-right: auto;
     max-width: 768px;
   }
   .pagination {
@@ -192,6 +216,7 @@
     padding-top: 12px;
     font-size: 20px;
     line-height: 1.2;
+    flex: 1 1 auto;
   }
   .pagination {
     margin-top: 60px;

@@ -6,6 +6,11 @@
   flex-wrap: wrap;
   justify-content: center;
 }
+@media screen and (max-width: 767px) {
+  .footer__container {
+    max-width: 479px;
+  }
+}
 
 .footer__first-content {
   font-family: 'Roboto';
