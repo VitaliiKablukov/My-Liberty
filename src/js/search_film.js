@@ -7,11 +7,11 @@ import { renderGalleryItem } from './render-gallery';
 
 let searchResult = '';
 
-export async function onSearchClick(e ) {
+export async function onSearchClick(e, page=1 ) {
   e.preventDefault();
   searchResult = e.target.elements.text.value.trim().toLowerCase();
 
-  const result = await getSearchFilm(searchResult);
+  const result = await getSearchFilm(searchResult, page);
 
   if (!result.results.length) {
     refs.searchErrorNotification.classList.remove('visually-hidden');
@@ -23,7 +23,6 @@ export async function onSearchClick(e ) {
   refs.gallery.innerHTML = '';
   console.log('result.results',result.results);
   renderGalleryItem(result.results);
-  let page = 1;
   paginationSearch(searchResult, page);
 }
 
