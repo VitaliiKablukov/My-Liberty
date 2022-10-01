@@ -48,15 +48,15 @@ import { getTrendingFilms, getSearchWithPagination } from './search_film';
             paginationToDisplay += template;
        }
 
-      if (totalPages <= 10) {
+      if (totalPages <= 6) {
         for (let i = 1; i <= totalPages; i++) {
           const template = `<li class="pagination-list-item ${i === currentPage ? "pag-activ" : ""
                                   }" id="${i}">${i}</li>`;
             paginationToDisplay += template;
         }
       } else {
-        let initialI = Math.max(1, currentPage - 5);
-        let endI = Math.min(initialI + 9, totalPages);
+        let initialI = Math.max(1, currentPage - 3);
+        let endI = Math.min(initialI + 5, totalPages);
         for (let i = initialI; i <= endI; i++) {
           const template = `<li class="pagination-list-item ${
                                     i === currentPage ? "pag-activ" : ""
