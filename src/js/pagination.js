@@ -1,121 +1,131 @@
 import { refs } from './refs';
 
 import { renderHomePageGallery } from './render-home-page-gallery';
-import { getTrendingFilms } from './search_film';
+import { getTrendingFilms, getSearchWithPagination } from './search_film';
 
+/* Ця функція є зворотним викликом прослуховувача подій клацання посилання на сторінку
+   *  він запускається, коли ви натискаєте іншу сторінку.
+   */
+ export async function onPaginateBtnClick (event) {
+     // дозволяє отримати ідентифікатор елемента, на якому ми клацнули
+    // корисно для отримання номера сторінки
+     if (event.target.nodeName !== 'LI') return;
 
-  export function renderPaginationBtn(e, page) {
-    
-    refs.pagination.innerHTML = '';
-    const per_page_max = e;
-    
-    console.log('renderPaginationBtn page - ', page);
-    let current_page=Number(page);
-    
-    
-    
-    function appendBtn(i, threepoint) {
-        const activeBtn = current_page === i;
-        
-        const liPagin = document.createElement('li');
-        liPagin.id = `${i}`;
-        liPagin.classList.add('pagination-list-item');
-
-        if (threepoint === true) {
-            liPagin.innerHTML = '...';
-            liPagin.disabled = true;
-            refs.pagination.append(liPagin);
-            return false;
-        }
-
-        if (activeBtn) liPagin.classList.add('pag-activ');
-        
-
-        liPagin.disabled = activeBtn;
-        liPagin.innerHTML = i;
-        liPagin.addEventListener('click', () => {
-            current_page = i;
-            refs.pagination.innerHTML = '';
-            logicPaginationBtn();
-        });
-        refs.pagination.append(liPagin);
-       
+     refs.gallery.innerHTML = '';
+     let page = event.target.getAttribute('id');
+     console.log('PaginateBtnClick id', page);
+     if (refs.paginationList.classList.contains('pagination-popular')) {
+         getPopularInLoadStartPage(page);
+     } else if (refs.paginationList.classList.contains('pagination-search')) {
+         getSearchWithPagination(page);
+     } else if (refs.paginationList.classList.contains('pagination-watched')) {
+        getWatchedWithPagination(page);
+     }else  if(refs.paginationList.classList.contains('pagination-queue')){
+        getQueueWithPagination(page);
     }
-  
-    logicPaginationBtn();
-   
-      function logicPaginationBtn() {
-        
-        if (per_page_max === 1) { 
-        return;
-        }
-        appendBtn(1);
-        if (per_page_max === 2) {
-            appendBtn(2);
-            return;
-        }
-        if (per_page_max > 2 && per_page_max <= 3) {
-            appendBtn(2);
-            appendBtn(3);
-            return;
-        }
-        if (per_page_max > 3 && per_page_max < 7) {
-            for (let i = 2; i <= per_page_max; i += 1) {
-                appendBtn(i);
-            }
-            return;
-        }
-        if (per_page_max < 8) {
-            for (let i = 2; i <= per_page_max; i++) {
-                appendBtn(i);
-        }
-            return;
-        }
-            
-        if (current_page < 6) {
-        appendBtn(2);
-        appendBtn(3);
-        appendBtn(4);
-        appendBtn(5);
-        appendBtn(6);
-        appendBtn(7);
-        appendBtn(current_page, true);
-        } else if (current_page <= per_page_max - 5) {
-        appendBtn(current_page, true);
-        appendBtn(current_page - 2);
-        appendBtn(current_page - 1);
-        appendBtn(current_page);
-        appendBtn(current_page + 1);
-        appendBtn(current_page + 2);
-        appendBtn(current_page, true);
-        } else {
-        appendBtn(current_page, true);
-        appendBtn(per_page_max - 6);
-        appendBtn(per_page_max - 5);
-        appendBtn(per_page_max - 4);
-        appendBtn(per_page_max - 3);
-        appendBtn(per_page_max - 2);
-        appendBtn(per_page_max - 1);
-        }
-        appendBtn(per_page_max);
-    }
-}
+  };
 
-
-export async function onPaginateBtnClick(e) {
-    // console.log('onPaginateBtnClick(e): ',e.target.nodeName);
-    if (e.target.nodeName !== 'LI') {
-        return;
+   export async function displayPagination (maxPages, page) {
+    let paginationToDisplay = "";
+    let currentPage = Number(page);
+    let totalPages = Number(maxPages);
+    if (totalPages <= 1) {
+            return;
     }
-    refs.gallery.innerHTML = '';
-    let pageNum = e.target.innerText;
-               
+
+    if (totalPages > 1) {
+      refs.paginationList.innerHTML = '';
     
-       const trendsFilms =await getTrendingFilms(pageNum).then(data => data);
+        let left = `<svg class="btn-icon" width="16" height="16">
+                <use href="./images/symbol-defs.svg#icon-arrow-left"></use>
+                </svg>`;
+        let right = ` <svg class="btn-icon" width="16" height="16">
+              <use href="./images/symbol-defs.svg#icon-arrow-right"></use>
+            </svg>`;
+        if (currentPage > 1) {
+            const template = `<li class="pagination-list-item btn-pag-left" id="${currentPage - 1
+                }"><</li>`;
+            paginationToDisplay += template;
+       }
+
+      if (totalPages <= 10) {
+        for (let i = 1; i <= totalPages; i++) {
+          const template = `<li class="pagination-list-item ${i === currentPage ? "pag-activ" : ""
+                                  }" id="${i}">${i}</li>`;
+            paginationToDisplay += template;
+        }
+      } else {
+        let initialI = Math.max(1, currentPage - 5);
+        let endI = Math.min(initialI + 9, totalPages);
+        for (let i = initialI; i <= endI; i++) {
+          const template = `<li class="pagination-list-item ${
+                                    i === currentPage ? "pag-activ" : ""
+                                  }" id="${i}">${i}</li>`;
+            paginationToDisplay += template;
+        }
+      }
+
+        if(currentPage === totalPages){paginationToDisplay=''}
+        else {
+            const template = `<li class="pagination-list-item btn-pag-right" id="${currentPage + 1}">
+          ></li>`;
+            paginationToDisplay += template;
+        }
+        let BtnPagination = `${paginationToDisplay}`;
+        // console.log('BtnPagination',BtnPagination);
+        refs.paginationList.insertAdjacentHTML('afterbegin', BtnPagination);
+    }
+    return;
+  };
+
+  export async function getPopularInLoadStartPage(page) {
+    
+    if (page === 1) {
+        refs.gallery.innerHTML = '';
+    }
+    let UlPagin=refs.paginationList;
+    if (UlPagin.classList.contains('pagination-search')||UlPagin.classList.contains('pagination-watched')||UlPagin.classList.contains('pagination-queue')) {
+            UlPagin.classList.remove('pagination-search');
+            UlPagin.classList.remove('pagination-watched');
+            UlPagin.classList.remove('pagination-queue');
+            UlPagin.classList.add('pagination-popular');
+    } 
+    const trendsFilms =await getTrendingFilms(page).then(data => data);
     const max_page = trendsFilms.total_pages;
-    
-    renderHomePageGallery(pageNum);
-    renderPaginationBtn(max_page, pageNum);
-    
-          
+    console.log('max_page', max_page);
+    if (page > max_page) {
+      return;
+    }
+   
+    displayPagination(max_page, page);
+    // refs.pagination.addEventListener('click', onPaginateBtnClick);
+    renderHomePageGallery(page);
+  }
+
+function getWatchedWithPagination(page) {
+    refs.gallery.innerHTML = '';
+     let UlPagin=refs.paginationList;
+    if (UlPagin.classList.contains('pagination-search')||UlPagin.classList.contains('pagination-popular')||UlPagin.classList.contains('pagination-queue')) {
+            UlPagin.classList.remove('pagination-search');
+            UlPagin.classList.remove('pagination-popular');
+            UlPagin.classList.remove('pagination-queue');
+            UlPagin.classList.add('pagination-watched');
+    } 
+    refs.paginationList.innerHTML = '';
+    console.log(' пагінацію додамо після написанні функціоналу Watched',page );
+    alert(' пагінацію додамо після написанні функціоналу  Watched');
+
 }
+ function getQueueWithPagination(page) {
+    refs.gallery.innerHTML = '';
+     let UlPagin=refs.paginationList;
+    if (UlPagin.classList.contains('pagination-search')||UlPagin.classList.contains('pagination-popular')||UlPagin.classList.contains('pagination-queue')) {
+            UlPagin.classList.remove('pagination-search');
+            UlPagin.classList.remove('pagination-popular');
+            UlPagin.classList.remove('pagination-queue');
+            UlPagin.classList.add('pagination-watched');
+    } 
+     refs.paginationList.innerHTML = '';
+     console.log(' пагінацію додамо після написанні функціоналу Queue', page);
+    alert(' пагінацію додамо після написанні функціоналу Queue');
+ }
