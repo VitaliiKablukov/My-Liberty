@@ -58,7 +58,7 @@ export function getSearchWithPagination(page) {
   // paginationSearch(searchResult, page);
 }
 
-function paginationSearch(searchResult, page) {
+async function paginationSearch(searchResult, page) {
   let UlPagin=refs.paginationList;
   if (UlPagin.classList.contains('pagination-popular')||UlPagin.classList.contains('pagination-watched')||UlPagin.classList.contains('pagination-queue')) {
     UlPagin.classList.remove('pagination-popular');
