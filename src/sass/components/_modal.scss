@@ -17,18 +17,18 @@ ul {
 }
 
 .backdrop-film {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: transparent;
-  opacity: 1;
-  &.is-hidden {
-    opacity: 0;
-    pointer-events: none;
-    visibility: hidden;
-  }
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(48, 48, 48, 0.499);
+    transition: opacity 300ms, visibility 300ms;
+    &.is-hidden {
+            opacity: 0;
+            pointer-events: none;
+            visibility: hidden;
+        }
 }
 
 .modal-render-box {
@@ -41,6 +41,25 @@ ul {
   }
 }
 
+
+.modal-film {
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background-color: #ffffff;
+    width: 280px;
+    padding: 48px 20px 40px 20px;
+    transition: transform 250ms;
+    transform: translate(-50%, -50%) scale(1);
+    transform: translate(-50%, -50%) rotate(0);
+    @media screen and (min-width: 768px) {
+        width: 710px;
+    }
+    @media screen and (min-width:1280px) {
+        width: 820px;
+    }
+    }
 .modal__content {
   width: 100%;
   @media screen and (min-width: 768px) {
@@ -51,22 +70,20 @@ ul {
   }
 }
 
-.modal-film {
-  box-sizing: border-box;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(1);
-  background-color: #fff;
-  width: 280px;
-  padding: 48px 20px 40px 20px;
-  @media screen and (min-width: 768px) {
-    width: 710px;
-  }
-  @media screen and (min-width: 1280px) {
-    width: 820px;
-  }
+.modal__content {
+    width: 100%;
+    @media screen and (min-width:768px) {
+    width: 264px;}
+    @media screen and (min-width:1280px) {
+    width: 390px;
+    }
 }
+
+.backdrop-film.is-hidden .modal-film {
+    transform: rotate(-290deg);
+  }
+
+
 
 .img-box {
   display: flex;
