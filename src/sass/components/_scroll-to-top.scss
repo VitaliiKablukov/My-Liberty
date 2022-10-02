@@ -1,0 +1,40 @@
+.scrollToTopBtn {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+
+    cursor: pointer;
+    transform: translateY(100px);
+    opacity: 0;
+
+    box-shadow: -2px -1px 12px 0px rgba(0,0,0,0.75);
+
+    border-radius: 100%;
+    border-color: #ff9801;
+    width: 60px;
+    height: 60px;
+
+    display: block;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 24;
+    color: #ff6b08;
+
+    transition: transform 0.5s, opacity 0.3s,;
+    z-index: 1000;
+  }
+  
+  .showScrollBtn {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .showScrollBtn:focus,
+  .showScrollBtn:hover,
+  .scrollToTopBtn:focus,
+  .scrollToTopBtn:hover {
+    outline-color: #ff9801;
+  }
+
+
