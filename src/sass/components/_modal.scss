@@ -24,6 +24,10 @@ ul {
   height: 100%;
   background: transparent;
   opacity: 1;
+
+  overflow-y: scroll;
+  display: flex;
+  justify-content: center;
   &.is-hidden {
     opacity: 0;
     pointer-events: none;
@@ -54,14 +58,15 @@ ul {
 .modal-film {
   box-sizing: border-box;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(1);
+  top: 3%;
   background-color: #fff;
   width: 280px;
   padding: 48px 20px 40px 20px;
   @media screen and (min-width: 768px) {
     width: 710px;
+    transform: translate(-50%, -50%) scale(1);
+    left: 50%;
+    top: 50%;
   }
   @media screen and (min-width: 1280px) {
     width: 820px;
@@ -74,9 +79,9 @@ ul {
 
 .close_svg {
   stroke: #000;
-  position: fixed;
-  top: 8px;
-  right: 8px;
+  position: absolute;
+  top: -5px;
+  right: -5px;
 }
 
 .close_svg:hover {
