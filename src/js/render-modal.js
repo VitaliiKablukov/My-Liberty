@@ -7,6 +7,7 @@ import { settingRenderModalBtn } from './add-library';
 
 export async function renderModal(event) {
   event.preventDefault();
+  stopScrollWhenModalOpen();
   if (!event.target.closest('.gallery-item')) {
     return;
   }
@@ -58,9 +59,14 @@ export async function renderModal(event) {
 refs.buttonModalClose.addEventListener('click', onModalButtonClose);
 refs.backdropEl.addEventListener('click', onBackdropClose);
 
+function stopScrollWhenModalOpen() {
+  refs.bodyEl.style.overflowY = 'hidden';
+}
+
 function onModalButtonClose() {
   refs.backdropEl.classList.add('is-hidden');
   refs.renderModalBox.innerHTML = '';
+  refs.bodyEl.style.overflowY = 'visible';
 }
 
 function onEscClose(event) {

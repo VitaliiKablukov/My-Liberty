@@ -21,8 +21,8 @@
 }
 
 .container-gallery {
-  // margin: 0 20px;
-  // padding: 20px 0 40px;
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -149,7 +149,13 @@
   align-items: center;
   text-align: center;
   background-color: white;
+  color: #000000;
   border-radius: 5px;
+  cursor: pointer;
+}
+.btn-pag-left,
+.btn-pag-right {
+  background-color: #cccccc;
 }
 .pag-activ {
   background-color: $accent-color;
@@ -161,7 +167,8 @@
 .btn-pag-right:hover,
 .btn-pag-left:focus,
 .btn-pag-right:focus {
-  background-color: #cccccc;
+  background-color: $accent-color;
+  color: #fff;
 }
 
 // .grid__item {
