@@ -3,6 +3,7 @@ import { API_KEY, SEARCH_URL, TREND_URL } from './constats';
 import { refs } from './refs';
 import { renderGalleryItem } from './render-gallery';
 import { displayPagination } from './pagination';
+import { showCardsLoader, hideCardsLoader } from './loader'
 // const onFormSubmit = refs.searchForm.addEventListener('submit', onSearchClick);
 
 let searchResult = '';
@@ -17,6 +18,7 @@ export async function onSearchClick(e, page=1 ) {
   
   if (!result.results.length) {
     refs.searchErrorNotification.classList.remove('visually-hidden');
+    hideCardsLoader()
     return;
   }
   if (!refs.searchErrorNotification.classList.contains('visually-hidden')) {
@@ -24,8 +26,13 @@ export async function onSearchClick(e, page=1 ) {
   }
   refs.gallery.innerHTML = '';
   console.log('result.results',result.results);
-  renderGalleryItem(result.results);
-  paginationSearch(searchResult, page);
+  showCardsLoader()
+  setTimeout(() => {
+    renderGalleryItem(result.results);
+    paginationSearch(searchResult, page);
+    hideCardsLoader()
+  }, 1000);
+  
 }
 
 async function getSearchFilm(searchResult, pageNumber = 1) {
