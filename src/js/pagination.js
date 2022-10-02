@@ -1,5 +1,5 @@
 import { refs } from './refs';
-
+import { createMarkupMyLibrary } from "./render-gallery";
 import { renderHomePageGallery } from './render-home-page-gallery';
 import { getTrendingFilms, getSearchWithPagination } from './search_film';
 
@@ -10,10 +10,10 @@ import { getTrendingFilms, getSearchWithPagination } from './search_film';
      // дозволяє отримати ідентифікатор елемента, на якому ми клацнули
     // корисно для отримання номера сторінки
      if (event.target.nodeName !== 'LI') return;
-
+    
      refs.gallery.innerHTML = '';
-     let page = event.target.getAttribute('id');
-     console.log('PaginateBtnClick id', page);
+   let page = event.target.getAttribute('id');
+   console.log('PaginateBtnClick id', page);
      if (refs.paginationList.classList.contains('pagination-popular')) {
          getPopularInLoadStartPage(page);
      } else if (refs.paginationList.classList.contains('pagination-search')) {
@@ -25,7 +25,7 @@ import { getTrendingFilms, getSearchWithPagination } from './search_film';
     }
   };
 
-   export async function displayPagination (maxPages, page) {
+export async function displayPagination(maxPages, page) {
     let paginationToDisplay = "";
     let currentPage = Number(page);
     let totalPages = Number(maxPages);
@@ -36,7 +36,7 @@ import { getTrendingFilms, getSearchWithPagination } from './search_film';
                                   }" id="${1}">${1}</li>`;
         let endP = `<li class="pagination-list-item ${totalPages === currentPage? "pag-activ": ""
                                   }" id="${totalPages}">${totalPages}</li>`;
-        let threepoint = `<li class="pagination-list-item" disabled="true">...</li>`;
+        let threepoint = `<li class="pagination-list-item" ><button class="threepoint" disabled>...</button></li>`;
         if (currentPage > 1&currentPage<=4) {
             const template = `<li class="pagination-list-item btn-pag-left" id="${currentPage - 1
                 }"><</li>`;
@@ -102,30 +102,49 @@ import { getTrendingFilms, getSearchWithPagination } from './search_film';
     renderHomePageGallery(page);
   }
 
-function getWatchedWithPagination(page) {
-    refs.gallery.innerHTML = '';
-     let UlPagin=refs.paginationList;
+export function getWatchedWithPagination(numberFilms) {
+  console.log('numberFilms', numberFilms);
+  refs.gallery.innerHTML = '';
+    let UlPagin=refs.paginationList;
     if (UlPagin.classList.contains('pagination-search')||UlPagin.classList.contains('pagination-popular')||UlPagin.classList.contains('pagination-queue')) {
             UlPagin.classList.remove('pagination-search');
             UlPagin.classList.remove('pagination-popular');
             UlPagin.classList.remove('pagination-queue');
             UlPagin.classList.add('pagination-watched');
     }
+  
+  console.log(' пагінацію додамо після написанні функціоналу Watched', numberFilms);
+  //TODO!!! розділити кількіть фільмів на сторінки
+   createMarkupMyLibrary(refs.filmOfLocalStoragWatched);
+   if (numberFilms <= 9) { refs.paginationList.innerHTML = ''; return; } 
     refs.paginationList.innerHTML = '';
-    console.log(' пагінацію додамо після написанні функціоналу Watched',page );
-    alert(' пагінацію додамо після написанні функціоналу  Watched');
+  alert(' пагінацію додамо після написання функціоналу  Watched');
+  let maxPages = Math.floor(numberFilms / 9);//TODO!! обрати іншу функцію для результату ділення
+  let page = 1;
+  console.log('maxPages',maxPages);maxPages = 2;
+  displayPagination(maxPages, page);
 
 }
- function getQueueWithPagination(page) {
-    refs.gallery.innerHTML = '';
-     let UlPagin=refs.paginationList;
+export function getQueueWithPagination(numberFilms) {
+   console.log('numberFilms', numberFilms);
+   refs.gallery.innerHTML = '';
+   let UlPagin=refs.paginationList;
     if (UlPagin.classList.contains('pagination-search')||UlPagin.classList.contains('pagination-popular')||UlPagin.classList.contains('pagination-watched')) {
             UlPagin.classList.remove('pagination-search');
             UlPagin.classList.remove('pagination-popular');
             UlPagin.classList.remove('pagination-watched');
             UlPagin.classList.add('pagination-queue');
     }
-     refs.paginationList.innerHTML = '';
-     console.log(' пагінацію додамо після написанні функціоналу Queue', page);
-    alert(' пагінацію додамо після написанні функціоналу Queue');
+   
+  console.log(' пагінацію додамо після написанні функціоналу Queue', numberFilms);
+  //TODO!!! розділити кількіть фільмів на сторінки
+  createMarkupMyLibrary(refs.filmOfLocalStoragQueue);
+  if (numberFilms <= 9) { refs.paginationList.innerHTML = ''; return; } 
+  refs.paginationList.innerHTML = '';
+  let maxPages = Math.floor(numberFilms / 9);//TODO!! обрати іншу функцію для результату ділення
+  let page =1;
+  console.log('maxPages', maxPages);
+  // maxPages = 2;
+  alert(' пагінацію додамо після написання функціоналу Queue');
+  displayPagination(maxPages, page);
  }

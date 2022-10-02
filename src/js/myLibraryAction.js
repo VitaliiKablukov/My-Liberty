@@ -1,7 +1,7 @@
 import Notiflix from "notiflix"
 import { refs } from "./refs"
 import { createMarkupMyLibrary } from "./render-gallery"
-
+import { getWatchedWithPagination, getQueueWithPagination } from "./pagination"
 
 export function notFind() {
     Notiflix.Notify.info('No aded film')
@@ -17,7 +17,8 @@ export function btnLogicsMyLibrary(e) {
 
         if (refs.filmOfLocalStoragWatched) {
             createMarkupMyLibrary(refs.filmOfLocalStoragWatched)
-
+            console.log('films watched', refs.filmOfLocalStoragWatched);
+            getWatchedWithPagination(refs.filmOfLocalStoragWatched.length); // TODO !!!витягти кількість фільмів
         } else {
             Notiflix.Notify.info('No films in this colection Watched')
         }
@@ -29,6 +30,8 @@ export function btnLogicsMyLibrary(e) {
 
         if (refs.filmOfLocalStoragQueue) {
             createMarkupMyLibrary(refs.filmOfLocalStoragQueue)
+            console.log('films Queue', refs.filmOfLocalStoragQueue);
+            getQueueWithPagination(refs.filmOfLocalStoragQueue.length); // TODO !!!витягти кількість фільмів
 
         } else {
             Notiflix.Notify.info('No films in this colection Queue')
