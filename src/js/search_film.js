@@ -10,7 +10,9 @@ let searchResult = '';
 export async function onSearchClick(e, page=1 ) {
   e.preventDefault();
   searchResult = e.target.elements.text.value.trim().toLowerCase();
-
+  if (!searchResult) {
+    return;
+  }
   const result = await getSearchFilm(searchResult, page);
   
   if (!result.results.length) {
