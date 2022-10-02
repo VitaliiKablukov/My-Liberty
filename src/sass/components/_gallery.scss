@@ -1,7 +1,6 @@
 .gallery {
   font-size: 20px;
   line-height: 1.2;
-  /* or 120% */
   margin: 0 auto;
   color: #000000;
   padding-top: 20px;
@@ -118,7 +117,6 @@
 .pagination {
   width: 100%;
   margin: 0 auto;
-  margin-bottom: 40px;
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
@@ -171,33 +169,23 @@
   color: #fff;
 }
 
-// .grid__item {
-//   min-width: 280px; //280px.
-//   margin-bottom: 20px;
-// }
-
 @media screen and (min-width: 768px) {
   .grid {
     display: flex;
     flex-wrap: wrap;
-    // justify-content: flex-start;
   }
-
-  // .container-gallery {
-  //   margin: 0 auto;
-  //   padding: 60px 32px;
-  //   margin: 0 auto;
-  //   max-width: 768px;
-  // }
+}
+@media screen and (max-width: 767px) {
   .pagination {
-    margin-bottom: 60px;
+    margin: 40px 0 20px;
+  }
+  .pagination-list-item {
+    width: 30px;
+    height: 30px;
   }
 }
 
 @media screen and (min-width: 768px) and (max-width: 1279px) {
-  // .grid {
-  //   margin-bottom: -32px;
-  // }
   .grid__item {
     &:nth-child(2n + 1) {
       margin-right: 32px;
@@ -216,15 +204,7 @@
 }
 
 @media screen and (min-width: 1280px) {
-  .grid {
-    // row-gap: 32px;
-    // column-gap: 16px;
-  }
   .grid__item {
-    // flex-basis: calc((100% - 32px) / 3);
-    // max-width: 395px;
-    // margin-bottom: 0;
-
     margin-right: 15px;
 
     &:nth-child(3n) {

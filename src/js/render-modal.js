@@ -22,6 +22,7 @@ export async function renderModal(event) {
   const genresFilm = Object.values(filmForModal.genres)[0].name;
 
   checkRepeatFilm(
+    settingRenderModalBtn,
     refs.filmOfLocalStoragWatched,
     refs.filmOfLocalStoragQueue,
     itemId
