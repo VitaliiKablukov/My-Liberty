@@ -29,7 +29,7 @@ import { getTrendingFilms, getSearchWithPagination } from './search_film';
     let paginationToDisplay = "";
     let currentPage = Number(page);
     let totalPages = Number(maxPages);
-    if (totalPages <= 1) { return;  }
+    if (totalPages <= 1) {refs.paginationList.innerHTML = ''; return;  }
     if (totalPages > 1) {
         refs.paginationList.innerHTML = '';
         let startP = `<li class="pagination-list-item ${1 === currentPage? "pag-activ": ""
