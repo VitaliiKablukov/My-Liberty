@@ -45,6 +45,14 @@ function onModalBtn(e) {
 
 function addFilmToLibrary({ category }, el) {
   let filmOfStorage = JSON.parse(localStorage.getItem(`${category}`));
+<<<<<<< Updated upstream
+=======
+
+  if (filmOfStorage !== null) {
+    selectedFilm = filmOfStorage;
+    console.log(filmOfStorage);
+  }
+>>>>>>> Stashed changes
   try {
     filmOfStorage.push(addFilm);
     localStorage.setItem(`${category}`, JSON.stringify(filmOfStorage));
