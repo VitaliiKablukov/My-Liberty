@@ -11,10 +11,8 @@ export function renderGallery(data, genres) {
             <h2 class="movie-card__title">${data.original_title}</h2>
             <p class="movie-card__info-item info-item__genres" id="${data.id}">
                 ${genres}
-                <span class="info-item info-item__date">| ${data.release_date.substring(
-                  0,
-                  4
-                )}</span>
+                <span class="info-item info-item__date">| ${
+    data.release_date.substring(0,4)}</span>
             </p>
         </div>
         </a>
@@ -58,10 +56,7 @@ export function renderGalleryItem(data) {
             <h2 class="movie-card__title">${original_title}</h2>
             <p class="movie-card__info-item info-item__genres" id="${data.id}">
                 ${genreStr}
-                <span class="info-item info-item__date">| ${release_date.substring(
-                  0,
-                  4
-                )}</span>
+                <span class="info-item info-item__date">| ${release_date.substring(0,4)}</span>
             </p>
         </div>
         </a>
