@@ -9,6 +9,8 @@ import {
 import { saveGenresToStorage } from './js/save-genres-to-localStorage';
 import { renderModal } from './js/render-modal';
 import { showCardsLoader, hideCardsLoader } from './js/loader';
+import { createMarkupMyLibrary } from './js/render-gallery';
+import { btnLogicsMyLibrary } from './js/myLibraryAction';
 
 saveGenresToStorage();
 // renderHomePageGallery();
@@ -16,18 +18,27 @@ saveGenresToStorage();
 if (refs.headerOnMainPage) {
   const onFormSubmit = refs.searchForm.addEventListener(
     'submit',
-        onSearchClick
+    onSearchClick
   );
   refs.searchButton.removeAttribute('disabled');
+
+  document.addEventListener('DOMContentLoaded', () => {
+    showCardsLoader();
+    setTimeout(() => {
+      getPopularInLoadStartPage(1);
+      hideCardsLoader();
+    }, 1000);
+  });
+  refs.paginationList.addEventListener('click', onPaginateBtnClick);
+}
+if (refs.headerOnMyLibraryPage) {
+  if (refs.filmOfLocalStoragWatched) {
+    createMarkupMyLibrary(refs.filmOfLocalStoragWatched);
+  } else {
+    // notFind()
+  }
+
+  refs.myLibraryBtnList.addEventListener('click', btnLogicsMyLibrary);
 }
 
-refs.paginationList.addEventListener('click', onPaginateBtnClick);
-
 refs.gallery.addEventListener('click', renderModal);
-document.addEventListener('DOMContentLoaded', () => {
-  showCardsLoader();
-  setTimeout(() => {
-    getPopularInLoadStartPage(1);
-    hideCardsLoader();
-  }, 1000);
-});

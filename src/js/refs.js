@@ -19,4 +19,6 @@ export let refs = {
   filmOfLocalStoragQueue: JSON.parse(localStorage.getItem('Queue')),
   headerOnMainPage: document.querySelector('.header'),
   bodyEl: document.querySelector('body'),
+  headerOnMyLibraryPage: document.querySelector('.my-library-header'),
+  myLibraryBtnList: document.querySelector('.buttons-list'),
 };
