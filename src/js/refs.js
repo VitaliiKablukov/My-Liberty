@@ -2,7 +2,7 @@ export let refs = {
   gallery: document.querySelector('.gallery-list'),
   searchForm: document.querySelector('.search-box'),
   pagination: document.querySelector('.pagination-popular'),
-  paginationList:document.querySelector('.pagination-list'),
+  paginationList: document.querySelector('.pagination-list'),
   paginationSearch: document.querySelector('.pagination-search'),
   // paginationWatched: document.querySelector('.pagination-watched'), //не видаляти - це заготовка для пагінаціі на сторінці watched
   // paginationQueue: document.querySelector('.pagination-queue'),//не видаляти  - це заготовка для пагінаціі на сторінці queue
@@ -19,4 +19,6 @@ export let refs = {
   filmOfLocalStoragQueue: JSON.parse(localStorage.getItem('Queue')),
   headerOnMainPage: document.querySelector('.header'),
   bodyEl: document.querySelector("body"),
+  headerOnMyLibraryPage: document.querySelector('.my-library-header'),
+  myLibraryBtnList: document.querySelector('.buttons-list')
 };
