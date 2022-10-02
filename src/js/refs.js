@@ -1,4 +1,4 @@
-export const refs = {
+export let refs = {
   gallery: document.querySelector('.gallery-list'),
   searchForm: document.querySelector('.search-box'),
   pagination: document.querySelector('.pagination-popular'),
@@ -12,4 +12,7 @@ export const refs = {
   backdropEl: document.querySelector('.backdrop-film'),
   modalFilm: document.querySelector('.modal-film'),
   renderModalBox: document.querySelector('.modal-render-box'),
+  filmOfLocalStoragWatched: JSON.parse(localStorage.getItem('Watched')),
+  filmOfLocalStoragQueue: JSON.parse(localStorage.getItem('Queue')),
+  headerOnMainPage: document.querySelector('.header'),
 };
