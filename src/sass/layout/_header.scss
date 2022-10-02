@@ -4,40 +4,42 @@
   padding-bottom: 40px;
   padding-top: 40px;
   background-color: red;
-  background-image: url('/src/images/bg-mobile.jpg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+    url('/src/images/home_header_bg_mob_1x.jpg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   @media (min-device-pixel-ratio: 2),
     (min-resolution: 192dpi),
     (min-resolution: 2dppx) {
-    background-image: url('/src/images/bg-mobile-2x.jpg');
-  }
-
-  @media screen and(min-width: 480px) {
-    //   max-width: 480px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      url('/src/images/home_header_bg_mob_2x.jpg');
   }
 
   @media screen and(min-width: 768px) {
-    background-image: url('/src/images/bg-tablet.jpg');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      url('/src/images/home_header_bg_tab_1x.jpg');
     @media (min-device-pixel-ratio: 2),
       (min-resolution: 192dpi),
       (min-resolution: 2dppx) {
-      background-image: url('/src/images/bg-tablet-2x.jpg');
+      background-image: linear-gradient(
+          rgba(0, 0, 0, 0.56),
+          rgba(0, 0, 0, 0.56)
+        ),
+        url('/src/images/home_header_bg_tab_2x.jpg');
     }
   }
   @media screen and(min-width: 1280px) {
-    background-image: url('/src/images/bg-web.jpg');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      url('/src/images/home_header_bg_1x.jpg');
     @media (min-device-pixel-ratio: 2),
       (min-resolution: 192dpi),
       (min-resolution: 2dppx) {
-      background-image: url('/src/images/bg-web-2x.jpg');
+      background-image: linear-gradient(
+          rgba(0, 0, 0, 0.56),
+          rgba(0, 0, 0, 0.56)
+        ),
+        url('/src/images/home_header_bg_2x.jpg');
     }
   }
 }
@@ -96,8 +98,8 @@
 }
 
 .search-button {
-  width: 12px;
-  height: 12px;
+  width: 18px;
+  height: 18px;
   right: 0%;
   top: 10%;
   padding: 0;
@@ -144,6 +146,11 @@
   position: relative;
   color: #ffffff;
   line-height: 1.17;
+
+  &:hover,
+  &:focus {
+    color: #ffffff;
+  }
 }
 
 .logo-link {
@@ -154,6 +161,7 @@
 .logo-link > span {
   display: none;
   max-height: 24px;
+
   @media screen and (min-width: 768px) {
     display: flex;
     align-items: center;
