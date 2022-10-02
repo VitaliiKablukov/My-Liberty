@@ -12,7 +12,7 @@ saveGenresToStorage();
 if (refs.headerOnMainPage) {
   const onFormSubmit = refs.searchForm.addEventListener(
     'submit',
-    onSearchClick
+        onSearchClick
   );
   refs.searchButton.removeAttribute('disabled');
 }
