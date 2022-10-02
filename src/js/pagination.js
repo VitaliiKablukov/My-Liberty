@@ -29,50 +29,50 @@ import { getTrendingFilms, getSearchWithPagination } from './search_film';
     let paginationToDisplay = "";
     let currentPage = Number(page);
     let totalPages = Number(maxPages);
-    if (totalPages <= 1) {
-            return;
-    }
-
+    if (totalPages <= 1) { return;  }
     if (totalPages > 1) {
-      refs.paginationList.innerHTML = '';
-    
-        let left = `<svg class="btn-icon" width="16" height="16">
-                <use href="./images/symbol-defs.svg#icon-arrow-left"></use>
-                </svg>`;
-        let right = ` <svg class="btn-icon" width="16" height="16">
-              <use href="./images/symbol-defs.svg#icon-arrow-right"></use>
-            </svg>`;
-        if (currentPage > 1) {
+        refs.paginationList.innerHTML = '';
+        let startP = `<li class="pagination-list-item ${1 === currentPage? "pag-activ": ""
+                                  }" id="${1}">${1}</li>`;
+        let endP = `<li class="pagination-list-item ${totalPages === currentPage? "pag-activ": ""
+                                  }" id="${totalPages}">${totalPages}</li>`;
+        let threepoint = `<li class="pagination-list-item" disabled="true">...</li>`;
+        if (currentPage > 1&currentPage<=4) {
             const template = `<li class="pagination-list-item btn-pag-left" id="${currentPage - 1
                 }"><</li>`;
             paginationToDisplay += template;
-       }
-
-      if (totalPages <= 6) {
+        } else if(currentPage >4){
+          const template = `<li class="pagination-list-item btn-pag-left" id="${currentPage - 1
+                }"><</li>${startP}${threepoint}`;
+            paginationToDisplay += template;
+       }                          
+        if (totalPages <= 6) {
         for (let i = 1; i <= totalPages; i++) {
-          const template = `<li class="pagination-list-item ${i === currentPage ? "pag-activ" : ""
+          paginationToDisplay += `<li class="pagination-list-item ${i === currentPage ? "pag-activ" : ""
                                   }" id="${i}">${i}</li>`;
-            paginationToDisplay += template;
         }
-      } else {
+        } else {
         let initialI = Math.max(1, currentPage - 3);
-        let endI = Math.min(initialI + 5, totalPages);
-        for (let i = initialI; i <= endI; i++) {
-          const template = `<li class="pagination-list-item ${
-                                    i === currentPage ? "pag-activ" : ""
-                                  }" id="${i}">${i}</li>`;
-            paginationToDisplay += template;
+        let endI = Math.min(initialI + 5, totalPages-1);
+          for (let i = initialI; i <= endI; i++) {
+            const template = `<li class="pagination-list-item ${
+                                      i === currentPage ? "pag-activ" : ""
+                                    }" id="${i}">${i}</li>`;
+              paginationToDisplay += template;
+          }
         }
+      if (currentPage === totalPages) {
+        paginationToDisplay += `${endP}`;
       }
-
-        if(currentPage === totalPages){paginationToDisplay=''}
-        else {
-            const template = `<li class="pagination-list-item btn-pag-right" id="${currentPage + 1}">
-          ></li>`;
+      else if (currentPage >= (totalPages - 3)){
+        const template = `${endP}<li class="pagination-list-item btn-pag-right" id="${currentPage + 1}">></li>`;
+        paginationToDisplay += template;
+      }
+      else {
+            const template = `${threepoint}${endP}<li class="pagination-list-item btn-pag-right" id="${currentPage + 1}">></li>`;
             paginationToDisplay += template;
         }
         let BtnPagination = `${paginationToDisplay}`;
-        // console.log('BtnPagination',BtnPagination);
         refs.paginationList.insertAdjacentHTML('afterbegin', BtnPagination);
     }
     return;
