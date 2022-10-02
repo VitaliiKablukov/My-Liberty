@@ -119,11 +119,11 @@ function getWatchedWithPagination(page) {
  function getQueueWithPagination(page) {
     refs.gallery.innerHTML = '';
      let UlPagin=refs.paginationList;
-    if (UlPagin.classList.contains('pagination-search')||UlPagin.classList.contains('pagination-popular')||UlPagin.classList.contains('pagination-queue')) {
+    if (UlPagin.classList.contains('pagination-search')||UlPagin.classList.contains('pagination-popular')||UlPagin.classList.contains('pagination-watched')) {
             UlPagin.classList.remove('pagination-search');
             UlPagin.classList.remove('pagination-popular');
-            UlPagin.classList.remove('pagination-queue');
-            UlPagin.classList.add('pagination-watched');
+            UlPagin.classList.remove('pagination-watched');
+            UlPagin.classList.add('pagination-queue');
     } 
      refs.paginationList.innerHTML = '';
      console.log(' пагінацію додамо після написанні функціоналу Queue', page);
