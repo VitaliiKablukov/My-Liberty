@@ -11,5 +11,6 @@ export const refs = {
   buttonModalClose: document.querySelector("[data-modalfilm-close]"),
   backdropEl: document.querySelector(".backdrop-film"),
   modalFilm: document.querySelector(".modal-film"),
-  renderModalBox: document.querySelector(".modal-render-box")
+  renderModalBox: document.querySelector(".modal-render-box"),
+  bodyEl: document.querySelector("body"),
 };
