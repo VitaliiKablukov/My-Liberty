@@ -23,8 +23,8 @@ export async function renderModal(event) {
 
   checkRepeatFilm(
     settingRenderModalBtn,
-    refs.filmOfLocalStoragWatched,
-    refs.filmOfLocalStoragQueue,
+    refs.filmOfLocalStorageWatched,
+    refs.filmOfLocalStorageQueue,
     itemId
   );
 
@@ -54,7 +54,7 @@ export async function renderModal(event) {
 
   refs.renderModalBox.insertAdjacentHTML('beforeend', modalLayout);
 
-  addFilmToLocalStorage(filmForModal);
+  addFilmToLocalStorage(filmForModal, itemId);
 }
 
 refs.buttonModalClose.addEventListener('click', onModalButtonClose);
