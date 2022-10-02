@@ -1,10 +1,12 @@
 import { renderHomePageGallery } from './js/render-home-page-gallery';
 import { refs } from './js/refs';
 import { onSearchClick, getTrendingFilms } from './js/search_film';
-import {renderPaginationBtn, getPopularInLoadStartPage, onPaginateBtnClick} from './js/pagination';
+import { renderPaginationBtn, getPopularInLoadStartPage, onPaginateBtnClick } from './js/pagination';
 import { saveGenresToStorage } from './js/save-genres-to-localStorage';
 import { renderModal } from './js/render-modal';
 import { showCardsLoader, hideCardsLoader } from './js/loader'
+import { createMarkupMyLibrary } from './js/render-gallery'
+import { btnLogicsMyLibrary } from './js/myLibraryAction'
 
 saveGenresToStorage();
 // renderHomePageGallery();
@@ -15,15 +17,30 @@ if (refs.headerOnMainPage) {
         onSearchClick
   );
   refs.searchButton.removeAttribute('disabled');
+
+  document.addEventListener('DOMContentLoaded', () => {
+    showCardsLoader()
+    setTimeout(() => {
+      getPopularInLoadStartPage(1);
+      hideCardsLoader()
+    }, 1000);
+  });
+  refs.paginationList.addEventListener('click', onPaginateBtnClick);
+
+
+} if (refs.headerOnMyLibraryPage) {
+  if (refs.filmOfLocalStoragWatched) {
+    createMarkupMyLibrary(refs.filmOfLocalStoragWatched)
+
+  } else {
+    // notFind()
+  }
+
+
+  refs.myLibraryBtnList.addEventListener('click', btnLogicsMyLibrary)
+
 }
 
-refs.paginationList.addEventListener('click', onPaginateBtnClick);
+
 
 refs.gallery.addEventListener('click', renderModal);
-document.addEventListener('DOMContentLoaded', () => {
-  showCardsLoader()
-  setTimeout(() => {
-    getPopularInLoadStartPage(1);
-    hideCardsLoader()
-  }, 1000);
-});
