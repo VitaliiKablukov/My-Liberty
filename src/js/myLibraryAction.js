@@ -1,27 +1,51 @@
+import Notiflix from "notiflix"
 import { refs } from "./refs"
+import { createMarkupMyLibrary } from "./render-gallery"
 
+
+export function notFind() {
+    Notiflix.Notify.info('No aded film')
+}
 export function btnLogicsMyLibrary(e) {
+    if (e.target.nodeName !== "BUTTON") {
+        return
+    }
     if (e.target.dataset.id === "watched") {
-
-        // // e.target.classList.remove('btn--transparent')
-        // // e.target.classList.add('btn--colored')
-        // previousTargetQue.classList.remove('btn--colored')
-        // previousTargetQue.classList.add('btn--transparent')
-
         refs.gallery.innerHTML = ""
-        createMarkupMyLibrary(refs.filmOfLocalStoragWatched)
 
+        changeBtnClass(e.target)
 
-    } if (e.target.dataset.id === "queue") {
+        if (refs.filmOfLocalStoragWatched) {
+            createMarkupMyLibrary(refs.filmOfLocalStoragWatched)
 
-        // e.target.classList.remove('btn--transparent')
-
-        // e.target.classList.add('btn--colored')
-        // // previousTargetWatch.classList.add('btn--transparent')
-        // // previousTargetWatch.classList.remove('btn--colored')
-
-        refs.gallery.innerHTML = ""
-        createMarkupMyLibrary(refs.filmOfLocalStoragQueue)
+        } else {
+            Notiflix.Notify.info('No films in this colection Watched')
+        }
 
     }
+    if (e.target.dataset.id === "queue") {
+        refs.gallery.innerHTML = ""
+        changeBtnClass(e.target)
+
+        if (refs.filmOfLocalStoragQueue) {
+            createMarkupMyLibrary(refs.filmOfLocalStoragQueue)
+
+        } else {
+            Notiflix.Notify.info('No films in this colection Queue')
+
+
+        }
+    }
+
+
+    function changeBtnClass(currentObject) {
+        const previousActiveBtn = document.querySelector('.btn--colored')
+        previousActiveBtn.classList.remove('btn--colored')
+        previousActiveBtn.classList.add('btn--transparent')
+        previousActiveBtn.removeAttribute('disabled', '')
+        currentObject.classList.remove('btn--transparent')
+        currentObject.classList.add('btn--colored')
+        e.target.setAttribute('disabled', '')
+    }
 }
+

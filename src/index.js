@@ -6,6 +6,7 @@ import { saveGenresToStorage } from './js/save-genres-to-localStorage';
 import { renderModal } from './js/render-modal';
 import { showCardsLoader, hideCardsLoader } from './js/loader'
 import { createMarkupMyLibrary } from './js/render-gallery'
+import { btnLogicsMyLibrary } from './js/myLibraryAction'
 
 saveGenresToStorage();
 // renderHomePageGallery();
@@ -28,16 +29,15 @@ if (refs.headerOnMainPage) {
 
 
 } if (refs.headerOnMyLibraryPage) {
-  createMarkupMyLibrary(refs.filmOfLocalStoragWatched)
-  refs.myLibraryBtnList.addEventListener('click', (e) => {
-    if (e.target.dataset.id === "watched") {
-      refs.gallery.innerHTML = ""
-      createMarkupMyLibrary(refs.filmOfLocalStoragWatched)
-    } if (e.target.dataset.id === "queue") {
-      refs.gallery.innerHTML = ""
-      createMarkupMyLibrary(refs.filmOfLocalStoragQueue)
-    }
-  })
+  if (refs.filmOfLocalStoragWatched) {
+    createMarkupMyLibrary(refs.filmOfLocalStoragWatched)
+
+  } else {
+    // notFind()
+  }
+
+
+  refs.myLibraryBtnList.addEventListener('click', btnLogicsMyLibrary)
 
 }
 
