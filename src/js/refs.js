@@ -1,4 +1,4 @@
-export const refs = {
+export let refs = {
   gallery: document.querySelector('.gallery-list'),
   searchForm: document.querySelector('.search-box'),
   pagination: document.querySelector('.pagination-popular'),
@@ -11,11 +11,12 @@ export const refs = {
   signInButton: document.querySelector('.js-nav__btn--signIn'),
   signOutButton: document.querySelector('.js-nav__btn--signOut'),
   myLibraryNavLink: document.querySelector('.js-library-link'),
-  buttonModalClose: document.querySelector("[data-modalfilm-close]"),
-  backdropEl: document.querySelector(".backdrop-film"),
-  modalFilm: document.querySelector(".modal-film"),
-  renderModalBox: document.querySelector(".modal-render-box"),
-  bodyEl: document.querySelector("body"),
+  buttonModalClose: document.querySelector('[data-modalfilm-close]'),
+  backdropEl: document.querySelector('.backdrop-film'),
+  modalFilm: document.querySelector('.modal-film'),
+  renderModalBox: document.querySelector('.modal-render-box'),
+  filmOfLocalStoragWatched: JSON.parse(localStorage.getItem('Watched')),
+  filmOfLocalStoragQueue: JSON.parse(localStorage.getItem('Queue')),
   headerOnMainPage: document.querySelector('.header'),
-
+  bodyEl: document.querySelector("body"),
 };
