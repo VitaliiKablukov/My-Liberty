@@ -6,15 +6,14 @@ import { checkRepeatFilm } from './add-library';
 import { settingRenderModalBtn } from './add-library';
 
 export async function renderModal(event) {
-  event.preventDefault()
-  stopScrollWhenModalOpen()
-  if (!event.target.closest(".gallery-item")) {
-    return
+  event.preventDefault();
+  stopScrollWhenModalOpen();
+  if (!event.target.closest('.gallery-item')) {
+    return;
   }
-  window.addEventListener("keydown", onEscClose)
-  refs.backdropEl.classList.remove("is-hidden")
-  let itemId = event.target.closest(".gallery-item").getAttribute("id");
-
+  window.addEventListener('keydown', onEscClose);
+  refs.backdropEl.classList.remove('is-hidden');
+  let itemId = event.target.closest('.gallery-item').getAttribute('id');
 
   const fetchChoosenFilm = await axios.get(
     `https://api.themoviedb.org/3/movie/${itemId}?api_key=7e0fc0f40a1f522dce260b9a97593bef&language=en-US`
@@ -24,8 +23,8 @@ export async function renderModal(event) {
 
   checkRepeatFilm(
     settingRenderModalBtn,
-    refs.filmOfLocalStoragWatched,
-    refs.filmOfLocalStoragQueue,
+    refs.filmOfLocalStorageWatched,
+    refs.filmOfLocalStorageQueue,
     itemId
   );
 
@@ -55,21 +54,20 @@ export async function renderModal(event) {
 
   refs.renderModalBox.insertAdjacentHTML('beforeend', modalLayout);
 
-  addFilmToLocalStorage(filmForModal);
+  addFilmToLocalStorage(filmForModal, itemId);
 }
 
 refs.buttonModalClose.addEventListener('click', onModalButtonClose);
 refs.backdropEl.addEventListener('click', onBackdropClose);
 
 function stopScrollWhenModalOpen() {
-  refs.bodyEl.style.overflowY = "hidden";
+  refs.bodyEl.style.overflowY = 'hidden';
 }
 
 function onModalButtonClose() {
-  refs.backdropEl.classList.add("is-hidden")
-  refs.renderModalBox.innerHTML = ""
-  refs.bodyEl.style.overflowY = "visible";
-
+  refs.backdropEl.classList.add('is-hidden');
+  refs.renderModalBox.innerHTML = '';
+  refs.bodyEl.style.overflowY = 'visible';
 }
 
 function onEscClose(event) {
