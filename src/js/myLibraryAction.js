@@ -16,9 +16,9 @@ export function btnLogicsMyLibrary(e) {
         changeBtnClass(e.target)
 
         if (refs.filmOfLocalStoragWatched) {
-            createMarkupMyLibrary(refs.filmOfLocalStoragWatched)
-            console.log('films watched', refs.filmOfLocalStoragWatched);
-            getWatchedWithPagination(refs.filmOfLocalStoragWatched.length); // TODO !!!витягти кількість фільмів
+            // createMarkupMyLibrary(refs.filmOfLocalStoragWatched)
+            // console.log('films watched', refs.filmOfLocalStoragWatched);
+            getWatchedWithPagination(refs.filmOfLocalStoragWatched.length, page=1); // TODO !!!витягти кількість фільмів
         } else {
             Notiflix.Notify.info('No films in this colection Watched')
         }
@@ -29,9 +29,9 @@ export function btnLogicsMyLibrary(e) {
         changeBtnClass(e.target)
 
         if (refs.filmOfLocalStoragQueue) {
-            createMarkupMyLibrary(refs.filmOfLocalStoragQueue)
-            console.log('films Queue', refs.filmOfLocalStoragQueue);
-            getQueueWithPagination(refs.filmOfLocalStoragQueue.length); // TODO !!!витягти кількість фільмів
+            // createMarkupMyLibrary(refs.filmOfLocalStoragQueue)
+            // console.log('films Queue', refs.filmOfLocalStoragQueue);
+            getQueueWithPagination(refs.filmOfLocalStoragQueue.length, page=1); // TODO !!!витягти кількість фільмів
 
         } else {
             Notiflix.Notify.info('No films in this colection Queue')

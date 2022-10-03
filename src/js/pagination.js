@@ -19,9 +19,9 @@ import { getTrendingFilms, getSearchWithPagination } from './search_film';
      } else if (refs.paginationList.classList.contains('pagination-search')) {
          getSearchWithPagination(page);
      } else if (refs.paginationList.classList.contains('pagination-watched')) {
-        getWatchedWithPagination(page);
+        getWatchedWithPagination(refs.filmOfLocalStoragWatched.length, page);
      }else  if(refs.paginationList.classList.contains('pagination-queue')){
-        getQueueWithPagination(page);
+        getQueueWithPagination(refs.filmOfLocalStoragQueue.length, page);
     }
   };
 
@@ -79,7 +79,7 @@ export async function displayPagination(maxPages, page) {
     return;
   };
 
-  export async function getPopularInLoadStartPage(page) {
+export async function getPopularInLoadStartPage(page) {
 
     if (page === 1) {
         refs.gallery.innerHTML = '';
@@ -93,7 +93,7 @@ export async function displayPagination(maxPages, page) {
     }
     const trendsFilms =await getTrendingFilms(page).then(data => data);
     const max_page = trendsFilms.total_pages;
-    // console.log('max_page', max_page);
+   
     if (page > max_page) {
       return;
     }
@@ -103,9 +103,8 @@ export async function displayPagination(maxPages, page) {
     renderHomePageGallery(page);
   }
 
-export function getWatchedWithPagination(maxFilms) {
-  console.log('maxFilms', maxFilms);
-  refs.gallery.innerHTML = '';
+export function getWatchedWithPagination(maxFilms, page) {
+  
     let UlPagin=refs.paginationList;
     if (UlPagin.classList.contains('pagination-search')||UlPagin.classList.contains('pagination-popular')||UlPagin.classList.contains('pagination-queue')) {
             UlPagin.classList.remove('pagination-search');
@@ -114,28 +113,24 @@ export function getWatchedWithPagination(maxFilms) {
             UlPagin.classList.add('pagination-watched');
     }
   
-   if (maxFilms <= 9) { refs.paginationList.innerHTML = ''; return; } 
-    refs.paginationList.innerHTML = '';
- 
-  console.log('Watched', refs.filmOfLocalStoragWatched);
-  let totalFilmsPages = Math.ceil(maxFilms / 9);//округлення до найближчого цілого
-  console.log('totalPages', totalFilmsPages);
+  let totalFilmsInPage = 9;
+  let totalFilmsPages = Math.ceil(maxFilms / totalFilmsInPage);
+  let arrData = refs.filmOfLocalStoragWatched;
   
-  let page = 1; //TODO!!! витягти сторінки - з якого по який єлемент показувати
-  //TODO!!! розділити кількіть фільмів на сторінки
- console.log('refs.filmOfLocalStoragQueue', refs.filmOfLocalStoragWatched);
-   createMarkupMyLibrary(refs.filmOfLocalStoragWatched);
+   displayListFilms(arrData, totalFilmsInPage, page);  
+
   if (page > totalFilmsPages) return;
 
-  
+  if (maxFilms <= totalFilmsInPage) {
+    refs.paginationList.innerHTML = '';
+    console.log('недостатня кількість фільмів для пагінації');
+    return;
+  } 
+    refs.paginationList.innerHTML = '';
   displayPaginationWatchedQueue(totalFilmsPages, page);
-  alert(' пагінацію додамо після написання функціоналу  Watched'); 
-  console.log(' пагінацію додамо після написанні функціоналу Watched maxFilms=', maxFilms);
-
 }
-export function getQueueWithPagination(maxFilms) {
-   console.log('maxFilms', maxFilms);
-   refs.gallery.innerHTML = '';
+export function getQueueWithPagination(maxFilms, page) {
+     
    let UlPagin=refs.paginationList;
     if (UlPagin.classList.contains('pagination-search')||UlPagin.classList.contains('pagination-popular')||UlPagin.classList.contains('pagination-watched')) {
             UlPagin.classList.remove('pagination-search');
@@ -144,23 +139,20 @@ export function getQueueWithPagination(maxFilms) {
             UlPagin.classList.add('pagination-queue');
     }
     
-  if (maxFilms <= 9) { refs.paginationList.innerHTML = ''; return; } 
-  refs.paginationList.innerHTML = '';
+  let totalFilmsInPage = 9;
+  let totalFilmsPages = Math.ceil(maxFilms / totalFilmsInPage);
+  let arrData = refs.filmOfLocalStoragQueue;
+ 
+  displayListFilms(arrData, totalFilmsInPage, page);  
 
-  let totalFilmsPages = Math.ceil(maxFilms / 9);//округлення до найближчого цілого
-  console.log('totalPages', totalFilmsPages);
-  
-  let page = 1;
-   
-  //TODO!!! розділити кількіть фільмів на сторінки
-  console.log('refs.filmOfLocalStoragQueue', refs.filmOfLocalStoragQueue);
-  createMarkupMyLibrary(refs.filmOfLocalStoragQueue); 
   if (page > totalFilmsPages) return;
-  
-  
+  if (maxFilms <= totalFilmsInPage) {
+    refs.paginationList.innerHTML = '';
+    console.log('недостатня кількість фільмів для пагінації');
+    return;
+  } 
+  refs.paginationList.innerHTML = '';
   displayPaginationWatchedQueue(totalFilmsPages, page);
-  alert(' пагінацію додамо після написання функціоналу Queue'); 
-  console.log(' пагінацію додамо після написанні функціоналу Queue maxFilms=', maxFilms);
 }
  
 function displayPaginationWatchedQueue(maxFilmsPages, page) {
@@ -201,6 +193,16 @@ function displayPaginationWatchedQueue(maxFilmsPages, page) {
         let BtnPagination = `${paginationToDisplay}`;
         refs.paginationList.insertAdjacentHTML('afterbegin', BtnPagination);
     }
+  refs.paginationList.addEventListener('click', onPaginateBtnClick);
     return;
+}
+function displayListFilms(arrData, totalFilmsInPage, page) {
+  refs.gallery.innerHTML = '';
+  page--;
 
+  const start = totalFilmsInPage * page;
+  const end = start + totalFilmsInPage;
+  const paginatedData = arrData.slice(start, end);
+  createMarkupMyLibrary(paginatedData);
+  // console.log('відпрацювала функція displayListFilms');
 }
