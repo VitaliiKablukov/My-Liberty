@@ -61,7 +61,7 @@ export async function displayPagination(maxPages, page) {
               paginationToDisplay += template;
           }
         }
-      if (currentPage === totalPages) {
+       if (currentPage === totalPages) {
         paginationToDisplay += `${endP}`;
       }
       else if (currentPage >= (totalPages - 3)){
@@ -72,6 +72,7 @@ export async function displayPagination(maxPages, page) {
             const template = `${threepoint}${endP}<li class="pagination-list-item btn-pag-right" id="${currentPage + 1}">></li>`;
             paginationToDisplay += template;
         }
+      
         let BtnPagination = `${paginationToDisplay}`;
         refs.paginationList.insertAdjacentHTML('afterbegin', BtnPagination);
     }
@@ -102,8 +103,8 @@ export async function displayPagination(maxPages, page) {
     renderHomePageGallery(page);
   }
 
-export function getWatchedWithPagination(numberFilms) {
-  console.log('numberFilms', numberFilms);
+export function getWatchedWithPagination(maxFilms) {
+  console.log('maxFilms', maxFilms);
   refs.gallery.innerHTML = '';
     let UlPagin=refs.paginationList;
     if (UlPagin.classList.contains('pagination-search')||UlPagin.classList.contains('pagination-popular')||UlPagin.classList.contains('pagination-queue')) {
@@ -113,20 +114,27 @@ export function getWatchedWithPagination(numberFilms) {
             UlPagin.classList.add('pagination-watched');
     }
   
-  console.log(' пагінацію додамо після написанні функціоналу Watched', numberFilms);
-  //TODO!!! розділити кількіть фільмів на сторінки
-   createMarkupMyLibrary(refs.filmOfLocalStoragWatched);
-   if (numberFilms <= 9) { refs.paginationList.innerHTML = ''; return; } 
+   if (maxFilms <= 9) { refs.paginationList.innerHTML = ''; return; } 
     refs.paginationList.innerHTML = '';
-  alert(' пагінацію додамо після написання функціоналу  Watched');
-  let maxPages = Math.floor(numberFilms / 9);//TODO!! обрати іншу функцію для результату ділення
-  let page = 1;
-  console.log('maxPages',maxPages);maxPages = 2;
-  displayPagination(maxPages, page);
+ 
+  console.log('Watched', refs.filmOfLocalStoragWatched);
+  let totalFilmsPages = Math.ceil(maxFilms / 9);//округлення до найближчого цілого
+  console.log('totalPages', totalFilmsPages);
+  
+  let page = 1; //TODO!!! витягти сторінки - з якого по який єлемент показувати
+  //TODO!!! розділити кількіть фільмів на сторінки
+ console.log('refs.filmOfLocalStoragQueue', refs.filmOfLocalStoragWatched);
+   createMarkupMyLibrary(refs.filmOfLocalStoragWatched);
+  if (page > totalFilmsPages) return;
+
+  
+  displayPaginationWatchedQueue(totalFilmsPages, page);
+  alert(' пагінацію додамо після написання функціоналу  Watched'); 
+  console.log(' пагінацію додамо після написанні функціоналу Watched maxFilms=', maxFilms);
 
 }
-export function getQueueWithPagination(numberFilms) {
-   console.log('numberFilms', numberFilms);
+export function getQueueWithPagination(maxFilms) {
+   console.log('maxFilms', maxFilms);
    refs.gallery.innerHTML = '';
    let UlPagin=refs.paginationList;
     if (UlPagin.classList.contains('pagination-search')||UlPagin.classList.contains('pagination-popular')||UlPagin.classList.contains('pagination-watched')) {
@@ -135,16 +143,64 @@ export function getQueueWithPagination(numberFilms) {
             UlPagin.classList.remove('pagination-watched');
             UlPagin.classList.add('pagination-queue');
     }
-   
-  console.log(' пагінацію додамо після написанні функціоналу Queue', numberFilms);
-  //TODO!!! розділити кількіть фільмів на сторінки
-  createMarkupMyLibrary(refs.filmOfLocalStoragQueue);
-  if (numberFilms <= 9) { refs.paginationList.innerHTML = ''; return; } 
+    
+  if (maxFilms <= 9) { refs.paginationList.innerHTML = ''; return; } 
   refs.paginationList.innerHTML = '';
-  let maxPages = Math.floor(numberFilms / 9);//TODO!! обрати іншу функцію для результату ділення
-  let page =1;
-  console.log('maxPages', maxPages);
-  // maxPages = 2;
-  alert(' пагінацію додамо після написання функціоналу Queue');
-  displayPagination(maxPages, page);
- }
+
+  let totalFilmsPages = Math.ceil(maxFilms / 9);//округлення до найближчого цілого
+  console.log('totalPages', totalFilmsPages);
+  
+  let page = 1;
+   
+  //TODO!!! розділити кількіть фільмів на сторінки
+  console.log('refs.filmOfLocalStoragQueue', refs.filmOfLocalStoragQueue);
+  createMarkupMyLibrary(refs.filmOfLocalStoragQueue); 
+  if (page > totalFilmsPages) return;
+  
+  
+  displayPaginationWatchedQueue(totalFilmsPages, page);
+  alert(' пагінацію додамо після написання функціоналу Queue'); 
+  console.log(' пагінацію додамо після написанні функціоналу Queue maxFilms=', maxFilms);
+}
+ 
+function displayPaginationWatchedQueue(maxFilmsPages, page) {
+  let paginationToDisplay = "";
+    let currentPage = Number(page);
+    let totalPages = Number(maxFilmsPages);
+    if (totalPages <= 1) {refs.paginationList.innerHTML = ''; return;  }
+    if (totalPages > 1) {
+        refs.paginationList.innerHTML = '';
+        
+        if (currentPage > 1) {
+            const template = `<li class="pagination-list-item btn-pag-left" id="${currentPage - 1
+                }"><</li>`;
+            paginationToDisplay += template;
+        } 
+        if (totalPages <= 4) {
+        for (let i = 1; i <= totalPages; i++) {
+          paginationToDisplay += `<li class="pagination-list-item ${i === currentPage ? "pag-activ" : ""
+                                  }" id="${i}">${i}</li>`;
+        }
+        } else {
+        let initialI = Math.max(1, currentPage - 2);
+        let endI = Math.min(initialI + 3, totalPages-1);
+          for (let i = initialI; i <= endI; i++) {
+            const template = `<li class="pagination-list-item ${
+                                      i === currentPage ? "pag-activ" : ""
+                                    }" id="${i}">${i}</li>`;
+              paginationToDisplay += template;
+          }
+        }
+      if (currentPage === totalPages) {
+        paginationToDisplay += ``;
+      }
+      else {
+        const template = `<li class="pagination-list-item btn-pag-right" id="${currentPage + 1}">></li>`;
+        paginationToDisplay += template;
+      }
+        let BtnPagination = `${paginationToDisplay}`;
+        refs.paginationList.insertAdjacentHTML('afterbegin', BtnPagination);
+    }
+    return;
+
+}
