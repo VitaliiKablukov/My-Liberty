@@ -19,6 +19,11 @@
 
 .gallery-title {
   position: absolute;
+  color: yellow;
+  text-shadow: blue 1px 0 10px;
+  font-size: 40px;
+  text-align: center;
+  padding: 20px 5px 5px;
 }
 
 .container-gallery {
@@ -267,10 +272,10 @@
   }
 }
 .ukraine {
-  background-image: url('/src/images/ukraine.jpg');
+  background-image: url('/src/images/ukraine.svg');
   width: 100%;
-  height: 80vh;
+  height: calc(100vh - 290px);
   background-repeat: no-repeat;
   background-position: center;
-  background-size: cover;
+  background-size: contain;
 }

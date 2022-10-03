@@ -99,7 +99,7 @@ export async function getPopularInLoadStartPage(page) {
     }
 
     displayPagination(max_page, page);
-    // refs.pagination.addEventListener('click', onPaginateBtnClick);
+    
     renderHomePageGallery(page);
   }
 
@@ -219,4 +219,11 @@ export function renderBlockEmpty() {
     refs.miLibraryHeader.classList.remove('is-hidden');
     refs.paginationList.innerHTML = '';
     refs.gallerySection.classList.add('ukraine');
+}
+export function removeBlockEmpty() {
+  if (refs.gallerySection.classList.contains('ukraine')) {
+    refs.gallerySection.classList.remove('ukraine');
+    refs.miLibraryHeader.classList.add('is-hidden');
+  }
+  return;
 }
