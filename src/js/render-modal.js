@@ -1,9 +1,7 @@
 import axios from 'axios';
 import { IMG_URL, API_KEY, SEARCH_URL } from './constats';
 import { refs } from './refs';
-import { addFilmToLocalStorage } from './add-library';
-import { checkRepeatFilm } from './add-library';
-import { settingRenderModalBtn } from './add-library';
+import { addEventListenerBtn } from './add-library';
 
 export async function renderModal(event) {
   event.preventDefault();
@@ -22,14 +20,6 @@ export async function renderModal(event) {
   const genresFilm = Object.values(filmForModal.genres)[0]
     ? Object.values(filmForModal.genres)[0].name
     : '';
-
-  checkRepeatFilm(
-    settingRenderModalBtn,
-    refs.filmOfLocalStorageWatched,
-    refs.filmOfLocalStorageQueue,
-    itemId
-  );
-
   const modalLayout = `<div class="img-box"><img class="film_modal_img" src="${IMG_URL}${
     filmForModal.poster_path
   }" alt="${filmForModal.original_title}" /></div>
@@ -53,18 +43,14 @@ export async function renderModal(event) {
       <h2 class="modal_about_head">About</h2>
       <p class="modal_about_text">${filmForModal.overview}</p>
       <ul class="modal_btn_list">
-          <li class="modal_btn_item"><button class="modal_btn" type="button" >${
-            settingRenderModalBtn.nameWatchedBtn
-          }</button></li>
-          <li class="modal_btn_item"><button class="modal_btn" type="button" >${
-            settingRenderModalBtn.nameQueueBtn
-          }</button></li>
+          <li class="modal_btn_item"><button class="modal_btn btn__watch" type="button" data-id="${itemId}">Add to watched</button></li>
+          <li class="modal_btn_item"><button class="modal_btn btn__queue" type="button" data-id="${itemId}">Add to queue</button></li>
       </ul>
     </div>`;
 
   refs.renderModalBox.insertAdjacentHTML('beforeend', modalLayout);
 
-  addFilmToLocalStorage(filmForModal, itemId);
+  addEventListenerBtn(filmForModal, itemId);
 }
 
 refs.buttonModalClose.addEventListener('click', onModalButtonClose);

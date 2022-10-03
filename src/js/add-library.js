@@ -3,15 +3,6 @@ import Notiflix from 'notiflix';
 
 let addFilm = {};
 let filmId = Number;
-let selectedFilm = [];
-export let settingRenderModalBtn = {
-  nameWatchedBtn: 'add to Watched',
-  nameQueueBtn: 'add to queue',
-};
-
-let optionsStorage = {
-  category: '',
-};
 
 const optionNotiflix = {
   width: '400px',
@@ -19,55 +10,98 @@ const optionNotiflix = {
   position: 'right-bottom',
 };
 
-export async function addFilmToLocalStorage(filmForModal, id) {
-  refs.modalBtn = document.querySelector('.modal_btn_list');
-  addEventListenerBtn(filmForModal, id);
-}
-
-function addEventListenerBtn(filmForModal, id) {
+export async function addEventListenerBtn(filmForModal, id) {
   addFilm.film = filmForModal;
   filmId = Number(id);
-  // console.log(filmId);
-  refs.modalBtn.addEventListener('click', onModalBtn);
-  return filmId;
+  textModalBtn(filmId);
 }
 
-function onModalBtn(e) {
+async function textModalBtn(id) {
+  const watchBtn = document.querySelector('.btn__watch');
+  const queueBtn = document.querySelector('.btn__queue');
+
+  console.dir(watchBtn);
+  if (inList(id, 'Watched') !== undefined) {
+    function changeText() {
+      watchBtn.disabled = false;
+      watchBtn.textContent = 'Remove for watched';
+      watchBtn.classList.add('active');
+    }
+    setTimeout(changeText, 250);
+  } else {
+    watchBtn.textContent = 'Add to watched';
+    watchBtn.classList.remove('active');
+    watchBtn.disabled = false;
+  }
+
+  if (inList(id, 'Queue') !== undefined) {
+    function changeText() {
+      queueBtn.disabled = false;
+      queueBtn.textContent = 'Remove for queue';
+      queueBtn.classList.add('active');
+    }
+    setTimeout(changeText, 250);
+  } else {
+    queueBtn.textContent = 'Add to queue';
+    queueBtn.classList.remove('active');
+    queueBtn.disabled = false;
+  }
+
+  watchBtn.addEventListener('click', onWatchBtn);
+  queueBtn.addEventListener('click', onQueuelBtn);
+}
+
+function onWatchBtn(e) {
   let el = e.target;
-  let filmOfStorageWatched = JSON.parse(localStorage.getItem('Watched'));
-  let filmOfStorageQueue = JSON.parse(localStorage.getItem('Queue'));
 
-  if (el.textContent === 'add to Watched') {
-    optionsStorage.category = 'Watched';
+  if (el.classList.contains('active')) {
+    filmOfStorageWatched = JSON.parse(localStorage.getItem(`Watched`));
+    removeFilmFromLibrary(`Watched`, filmOfStorageWatched);
+    textModalBtn(filmId);
+  } else {
+    filmOfStorageWatched = JSON.parse(localStorage.getItem(`Watched`));
+    filmOfStorageQueue = JSON.parse(localStorage.getItem(`Queue`));
 
-    addFilmToSelectedFilm(optionsStorage, filmOfStorageWatched);
-    el.textContent = `remove for Watched`;
-    settingRenderModalBtn.nameWatchedBtn = 'remove for Watched';
-  } else if (el.textContent === 'remove for Watched') {
-    optionsStorage.category = 'Watched';
+    addFilmToSelectedFilm(`Watched`, filmOfStorageWatched);
 
-    removeFilmFromLibrary(optionsStorage, filmOfStorageWatched);
-    el.textContent = 'add to Watched';
-    settingRenderModalBtn.nameWatchedBtn = 'add to Watched';
-  }
-
-  if (el.textContent === 'add to queue') {
-    optionsStorage.category = 'Queue';
-
-    addFilmToSelectedFilm(optionsStorage, filmOfStorageQueue);
-
-    el.textContent = `remove for queue`;
-    settingRenderModalBtn.nameQueueBtn = 'remove for queue';
-  } else if (el.textContent === 'remove for queue') {
-    optionsStorage.category = 'Queue';
-
-    removeFilmFromLibrary(optionsStorage, filmOfStorageQueue);
-    el.textContent = 'add to queue';
-    settingRenderModalBtn.nameQueueBtn = 'add to queue';
+    if (filmOfStorageQueue !== null) {
+      const checkResult = filmOfStorageQueue.find(
+        film => film.film.id === Number(filmId)
+      );
+      if (checkResult !== undefined) {
+        removeFilmFromLibrary(`Queue`, filmOfStorageQueue);
+      }
+    }
+    textModalBtn(filmId);
   }
 }
 
-function addFilmToSelectedFilm({ category }, selectedFilm) {
+function onQueuelBtn(e) {
+  let el = e.target;
+
+  if (el.classList.contains('active')) {
+    filmOfStorageQueue = JSON.parse(localStorage.getItem(`Queue`));
+    removeFilmFromLibrary(`Queue`, filmOfStorageQueue);
+    textModalBtn(filmId);
+  } else {
+    filmOfStorageWatched = JSON.parse(localStorage.getItem(`Watched`));
+    filmOfStorageQueue = JSON.parse(localStorage.getItem(`Queue`));
+
+    addFilmToSelectedFilm(`Queue`, filmOfStorageQueue);
+    if (filmOfStorageWatched !== null) {
+      const checkResult = filmOfStorageWatched.find(
+        film => film.film.id === Number(filmId)
+      );
+      if (checkResult !== undefined) {
+        removeFilmFromLibrary(`Watched`, filmOfStorageWatched);
+      }
+    }
+
+    textModalBtn(filmId);
+  }
+}
+
+function addFilmToSelectedFilm(category, selectedFilm) {
   if (selectedFilm !== null) {
     selectedFilm.push(addFilm);
     addFilmToLibrary(category, selectedFilm);
@@ -81,61 +115,29 @@ function addFilmToSelectedFilm({ category }, selectedFilm) {
 function addFilmToLibrary(category, selectedFilm) {
   try {
     localStorage.setItem(`${category}`, JSON.stringify(selectedFilm));
+
     messageNotiflixSuccesAdd(category);
   } catch (error) {
     messageNotiflixFailureAdd(category);
   }
 }
 
-function removeFilmFromLibrary({ category }, remainFilm) {
+function removeFilmFromLibrary(category, remainFilm) {
   console.log(category);
   try {
     const findRemuveIndex = remainFilm
       .map(film => film.film.id)
       .findIndex(id => id === filmId);
     remainFilm.splice(findRemuveIndex, 1);
-    localStorage.setItem(`${category}`, JSON.stringify(remainFilm));
-    messageNotiflixSuccesRemove(category);
+    if (findRemuveIndex !== undefined) {
+      localStorage.setItem(`${category}`, JSON.stringify(remainFilm));
+      messageNotiflixSuccesRemove(category);
+    }
   } catch (error) {
     messageNotiflixFailureRemove(category);
   }
 }
 
-export async function checkRepeatFilm(
-  settingRenderModalBtn,
-  filmOfLocalStorageWatched,
-  filmOfLocalStorageQueue,
-  filmForModal
-) {
-  if (filmOfLocalStorageWatched !== null) {
-    const checkResultWatched = filmOfLocalStorageWatched.find(
-      film => film.film.id === Number(filmForModal)
-    );
-
-    if (checkResultWatched !== undefined) {
-      settingRenderModalBtn.nameWatchedBtn = 'remove for Watched';
-    }
-
-    if (checkResultWatched === undefined) {
-      settingRenderModalBtn.nameWatchedBtn = 'add to Watched';
-    }
-  }
-
-  if (filmOfLocalStorageQueue !== null) {
-    const checkResultQueue = filmOfLocalStorageQueue.find(
-      film => film.film.id === Number(filmForModal)
-    );
-
-    if (checkResultQueue !== undefined) {
-      settingRenderModalBtn.nameQueueBtn = 'remove for queue';
-    }
-
-    if (checkResultQueue === undefined) {
-      settingRenderModalBtn.nameQueueBtn = 'add to queue';
-    }
-    // console.log(checkResultQueue);
-  }
-}
 
 function messageNotiflixSuccesAdd(category) {
   Notiflix.Notify.success(
@@ -163,4 +165,12 @@ function messageNotiflixFailureRemove(category) {
     `Sorry, failed to remove movie from ${category}`,
     optionNotiflix
   );
+}
+
+function inList(id, category) {
+  let LocalStorage = JSON.parse(localStorage.getItem(`${category}`));
+  if (LocalStorage !== null) {
+    const checkResult = LocalStorage.find(film => film.film.id === Number(id));
+    return checkResult;
+  }
 }
