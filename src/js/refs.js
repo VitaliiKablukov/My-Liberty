@@ -20,5 +20,6 @@ export let refs = {
   headerOnMainPage: document.querySelector('.header'),
   bodyEl: document.querySelector("body"),
   headerOnMyLibraryPage: document.querySelector('.my-library-header'),
-  myLibraryBtnList: document.querySelector('.buttons-list')
+  myLibraryBtnList: document.querySelector('.buttons-list'),
+  miLibraryHeader: document.querySelector('.gallery-title')
 };

@@ -6,7 +6,7 @@ import { saveGenresToStorage } from './js/save-genres-to-localStorage';
 import { renderModal } from './js/render-modal';
 import { showCardsLoader, hideCardsLoader } from './js/loader'
 import { createMarkupMyLibrary } from './js/render-gallery'
-import { btnLogicsMyLibrary } from './js/myLibraryAction'
+import { btnLogicsMyLibrary, noFilm } from './js/myLibraryAction'
 
 saveGenresToStorage();
 // renderHomePageGallery();
@@ -14,7 +14,7 @@ saveGenresToStorage();
 if (refs.headerOnMainPage) {
   const onFormSubmit = refs.searchForm.addEventListener(
     'submit',
-        onSearchClick
+    onSearchClick
   );
   refs.searchButton.removeAttribute('disabled');
 
@@ -33,7 +33,7 @@ if (refs.headerOnMainPage) {
     createMarkupMyLibrary(refs.filmOfLocalStoragWatched)
 
   } else {
-    // notFind()
+    noFilm()
   }
 
 

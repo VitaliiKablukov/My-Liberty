@@ -2,10 +2,12 @@ import Notiflix from "notiflix"
 import { refs } from "./refs"
 import { createMarkupMyLibrary } from "./render-gallery"
 
-
-export function notFind() {
-    Notiflix.Notify.info('No aded film')
+export function noFilm() {
+    Notiflix.Notify.info('No films in this colection Queue', {
+        position: 'right-bottom'
+    })
 }
+
 export function btnLogicsMyLibrary(e) {
     if (e.target.nodeName !== "BUTTON") {
         return
@@ -19,7 +21,9 @@ export function btnLogicsMyLibrary(e) {
             createMarkupMyLibrary(refs.filmOfLocalStoragWatched)
 
         } else {
-            Notiflix.Notify.info('No films in this colection Watched')
+            Notiflix.Notify.info('No films in this colection Watched', {
+                position: 'right-bottom'
+            })
         }
 
     }
@@ -31,7 +35,10 @@ export function btnLogicsMyLibrary(e) {
             createMarkupMyLibrary(refs.filmOfLocalStoragQueue)
 
         } else {
-            Notiflix.Notify.info('No films in this colection Queue')
+
+            Notiflix.Notify.info('No films in this colection Queue', {
+                position: 'right-bottom'
+            })
 
 
         }
