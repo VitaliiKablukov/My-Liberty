@@ -19,7 +19,9 @@ export async function renderModal(event) {
     `https://api.themoviedb.org/3/movie/${itemId}?api_key=7e0fc0f40a1f522dce260b9a97593bef&language=en-US`
   );
   const filmForModal = fetchChoosenFilm.data;
-  const genresFilm = Object.values(filmForModal.genres)[0].name;
+  const genresFilm = Object.values(filmForModal.genres)[0]
+    ? Object.values(filmForModal.genres)[0].name
+    : '';
 
   checkRepeatFilm(
     settingRenderModalBtn,
@@ -28,7 +30,9 @@ export async function renderModal(event) {
     itemId
   );
 
-  const modalLayout = `<div class="img-box"><img class="film_modal_img" src="${IMG_URL}${filmForModal.poster_path}" alt="${filmForModal.original_title}" /></div>
+  const modalLayout = `<div class="img-box"><img class="film_modal_img" src="${IMG_URL}${
+    filmForModal.poster_path
+  }" alt="${filmForModal.original_title}" /></div>
     <div class="modal__content">
       <h1 class="film_modal_title">${filmForModal.title}</h1>
       <ul class="film_info_list">
@@ -38,7 +42,9 @@ export async function renderModal(event) {
           <p class="film_item_category">Original Title </p>
           <p class="film_item_category">Genre </p></li>
           <li class="film_info_item">
-            <p class="film_item_parameters"><span>${filmForModal.vote_average.toFixed(1)}</span> / ${filmForModal.vote_count}</p>
+            <p class="film_item_parameters"><span>${filmForModal.vote_average.toFixed(
+              1
+            )}</span> / ${filmForModal.vote_count}</p>
             <p class="film_item_parameters">${filmForModal.popularity}</p>
             <p class="film_item_parameters">${filmForModal.original_title}</p>
             <p class="film_item_parameters">${genresFilm}</p>
@@ -47,8 +53,12 @@ export async function renderModal(event) {
       <h2 class="modal_about_head">About</h2>
       <p class="modal_about_text">${filmForModal.overview}</p>
       <ul class="modal_btn_list">
-          <li class="modal_btn_item"><button class="modal_btn" type="button" >${settingRenderModalBtn.nameWatchedBtn}</button></li>
-          <li class="modal_btn_item"><button class="modal_btn" type="button" >${settingRenderModalBtn.nameQueueBtn}</button></li>
+          <li class="modal_btn_item"><button class="modal_btn" type="button" >${
+            settingRenderModalBtn.nameWatchedBtn
+          }</button></li>
+          <li class="modal_btn_item"><button class="modal_btn" type="button" >${
+            settingRenderModalBtn.nameQueueBtn
+          }</button></li>
       </ul>
     </div>`;
 
