@@ -9,6 +9,9 @@ ul {
 }
 
 .film_item_parameters span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background-color: var(--btn--colored);
   width: 36px;
   height: 16px;
@@ -28,6 +31,7 @@ ul {
   display: flex;
   justify-content: center;
   overflow-y: scroll;
+
   &.is-hidden {
     opacity: 0;
     pointer-events: none;
@@ -37,9 +41,11 @@ ul {
 
 .modal-render-box {
   box-sizing: border-box;
+
   @media screen and (min-width: 768px) {
     display: flex;
   }
+
   @media screen and (min-width: 1280px) {
     width: 806px;
   }
@@ -61,15 +67,19 @@ ul {
     top: 50%;
     left: 50%;
   }
+
   @media screen and (min-width: 1280px) {
     width: 820px;
   }
 }
+
 .modal__content {
   width: 100%;
+
   @media screen and (min-width: 768px) {
     width: 264px;
   }
+
   @media screen and (min-width: 1280px) {
     width: 390px;
   }
@@ -77,9 +87,11 @@ ul {
 
 .modal__content {
   width: 100%;
+
   @media screen and (min-width: 768px) {
     width: 264px;
   }
+
   @media screen and (min-width: 1280px) {
     width: 390px;
   }
@@ -120,11 +132,13 @@ ul {
   width: 100%;
   margin-bottom: 20px;
   border-radius: 5px;
+
   @media screen and (min-width: 768px) {
     width: 264px;
     height: 374px;
     margin: 0 68px 0 0;
   }
+
   @media screen and (min-width: 1280px) {
     width: 375px;
     height: 480px;
@@ -139,6 +153,7 @@ ul {
   font-family: 'Roboto', sans-serif;
   font-weight: 500;
   margin-bottom: 20px;
+
   @media screen and (min-width: 1280px) {
     font-size: 30px;
     line-height: 1.16;
@@ -156,9 +171,11 @@ ul {
 .film_info_item {
   text-align: left;
   color: #8c8c8c;
+
   &:not(:last-child) {
     margin-right: 40px;
   }
+
   @media screen and (min-width: 1280px) {
     &:not(:last-child) {
       margin-right: 83px;
@@ -168,16 +185,20 @@ ul {
 
 .film_item_parameters {
   color: #000;
+
   &:not(:last-child) {
     margin-bottom: 8px;
   }
+
   &:nth-child(-n + 2) {
     line-height: 1.166;
   }
+
   &:nth-child(3) {
     text-transform: uppercase;
   }
 }
+
 .film_item_category {
   &:not(:last-child) {
     margin-bottom: 8px;
@@ -218,15 +239,36 @@ ul {
   font-family: 'Roboto', sans-serif;
   font-size: 12px;
   line-height: 1.33;
+
   &:hover {
     background-color: #ff6b01;
     color: #fff;
     border: none;
   }
+
   @media screen and (min-width: 768px) {
     width: 125px;
   }
+
   @media screen and (min-width: 1280px) {
     width: 136px;
+  }
+}
+
+.film_item_parameter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--btn--colored);
+  width: 36px;
+  height: 16px;
+  border-radius: 5px;
+  color: #fff;
+  margin-left: 8px;
+  font-size: 12px;
+
+  @media screen and (min-width:1280px) {
+    width: 40px;
+    height: 20px;
   }
 }

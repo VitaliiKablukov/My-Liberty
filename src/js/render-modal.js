@@ -38,7 +38,7 @@ export async function renderModal(event) {
           <p class="film_item_category">Original Title </p>
           <p class="film_item_category">Genre </p></li>
           <li class="film_info_item">
-            <p class="film_item_parameters"><span>${filmForModal.vote_average}</span> / ${filmForModal.vote_count}</p>
+            <p class="film_item_parameters"><span>${filmForModal.vote_average.toFixed(1)}</span> / ${filmForModal.vote_count}</p>
             <p class="film_item_parameters">${filmForModal.popularity}</p>
             <p class="film_item_parameters">${filmForModal.original_title}</p>
             <p class="film_item_parameters">${genresFilm}</p>

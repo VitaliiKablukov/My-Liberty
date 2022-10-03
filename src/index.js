@@ -10,7 +10,7 @@ import { saveGenresToStorage } from './js/save-genres-to-localStorage';
 import { renderModal } from './js/render-modal';
 import { showCardsLoader, hideCardsLoader } from './js/loader';
 import { createMarkupMyLibrary } from './js/render-gallery';
-import { btnLogicsMyLibrary } from './js/myLibraryAction';
+import { btnLogicsMyLibrary, noFilm } from './js/myLibraryAction';
 
 saveGenresToStorage();
 // renderHomePageGallery();
@@ -35,7 +35,7 @@ if (refs.headerOnMyLibraryPage) {
   if (refs.filmOfLocalStoragWatched) {
     createMarkupMyLibrary(refs.filmOfLocalStoragWatched);
   } else {
-    // notFind()
+    noFilm();
   }
 
   refs.myLibraryBtnList.addEventListener('click', btnLogicsMyLibrary);

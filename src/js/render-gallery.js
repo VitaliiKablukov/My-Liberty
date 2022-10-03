@@ -79,7 +79,8 @@ export function createMarkupMyLibrary(data) {
       original_title,
       genres,
       release_date,
-      poster_path, } = film.film
+      poster_path,
+      vote_average } = film.film
 
     const genreStr = genres
       .map(genre => {
@@ -93,9 +94,12 @@ export function createMarkupMyLibrary(data) {
             loading="lazy" />
         <div class="movie-card__info">
             <h2 class="movie-card__title">${original_title}</h2>
+            <div>
                  <p class="movie-card__info-item info-item__genres" id="${data.id}">
-                ${genreStr}
+                ${genreStr} 
                 <span class="info-item info-item__date">| ${release_date.substring(0, 4)}</span>
+                <span class="film_item_parameter">${vote_average.toFixed(1)}</span>
+
             </p>
         </div>
         </a>
