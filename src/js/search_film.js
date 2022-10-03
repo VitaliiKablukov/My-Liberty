@@ -61,7 +61,7 @@ export async function getTrendingFilms(pageNumber = 1) {
   });
 
   if (!response.ok) {
-    console.log('error', response.status);
+    console.error(response.status);
   }
   return response.data;
 }
