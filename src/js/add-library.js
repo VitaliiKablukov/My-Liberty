@@ -3,10 +3,12 @@ import Notiflix from 'notiflix';
 
 let addFilm = {};
 let filmId = Number;
+
 export let settingRenderModalBtn = {
   nameWatchedBtn: 'add to Watched',
   nameQueueBtn: 'add to queue',
 };
+
 let optionsStorage = {
   category: '',
 };
