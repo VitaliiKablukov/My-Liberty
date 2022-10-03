@@ -138,6 +138,7 @@ function removeFilmFromLibrary(category, remainFilm) {
   }
 }
 
+
 function messageNotiflixSuccesAdd(category) {
   Notiflix.Notify.success(
     `Movie successfully added to ${category}`,
