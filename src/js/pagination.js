@@ -123,7 +123,7 @@ export function getWatchedWithPagination(maxFilms, page) {
 
   if (maxFilms <= totalFilmsInPage) {
     refs.paginationList.innerHTML = '';
-    console.log('недостатня кількість фільмів для пагінації');
+    console.log('недостатня кількість фільмів для пагінації Watched');
     return;
   } 
     refs.paginationList.innerHTML = '';
@@ -142,13 +142,13 @@ export function getQueueWithPagination(maxFilms, page) {
   let totalFilmsInPage = 9;
   let totalFilmsPages = Math.ceil(maxFilms / totalFilmsInPage);
   let arrData = refs.filmOfLocalStoragQueue;
- 
-  displayListFilms(arrData, totalFilmsInPage, page);  
+  // arrData = [];//test
+  displayListFilms(arrData, totalFilmsInPage, page);
 
   if (page > totalFilmsPages) return;
   if (maxFilms <= totalFilmsInPage) {
-    refs.paginationList.innerHTML = '';
-    console.log('недостатня кількість фільмів для пагінації');
+    refs.paginationList.innerHTML = ''; 
+    console.log('недостатня кількість фільмів для пагінації Queue');
     return;
   } 
   refs.paginationList.innerHTML = '';
@@ -157,6 +157,7 @@ export function getQueueWithPagination(maxFilms, page) {
  
 function displayPaginationWatchedQueue(maxFilmsPages, page) {
   let paginationToDisplay = "";
+  if (maxFilmsPages === 0) return;
     let currentPage = Number(page);
     let totalPages = Number(maxFilmsPages);
     if (totalPages <= 1) {refs.paginationList.innerHTML = ''; return;  }
@@ -198,11 +199,24 @@ function displayPaginationWatchedQueue(maxFilmsPages, page) {
 }
 function displayListFilms(arrData, totalFilmsInPage, page) {
   refs.gallery.innerHTML = '';
+  if (arrData.length === 0) {
+    renderBlockEmpty();
+    return;
+  } 
   page--;
-
+  
   const start = totalFilmsInPage * page;
   const end = start + totalFilmsInPage;
   const paginatedData = arrData.slice(start, end);
   createMarkupMyLibrary(paginatedData);
   // console.log('відпрацювала функція displayListFilms');
+}
+
+function renderBlockEmpty() {
+ 
+    galleryContainer = document.querySelector('.container-gallery');
+    console.log('galleryContainer',galleryContainer);
+    const template = `<h2>Movies create the mood! Choose your mood!</h2>`;
+    refs.gallery.insertAdjacentHTML('beforebegin', `${template}`);
+    refs.paginationList.innerHTML = '';
 }
