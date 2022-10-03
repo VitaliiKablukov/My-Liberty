@@ -214,9 +214,9 @@ function displayListFilms(arrData, totalFilmsInPage, page) {
 
 function renderBlockEmpty() {
  
-    galleryContainer = document.querySelector('.container-gallery');
-    console.log('galleryContainer',galleryContainer);
+    let gallerySection = document.querySelector('.gallery');
     const template = `<h2>Movies create the mood! Choose your mood!</h2>`;
     refs.gallery.insertAdjacentHTML('beforebegin', `${template}`);
-    refs.paginationList.innerHTML = '';
+  refs.paginationList.innerHTML = '';
+  gallerySection.classList.add('ukraine');
 }
