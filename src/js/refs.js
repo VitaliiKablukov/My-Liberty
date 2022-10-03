@@ -15,10 +15,11 @@ export let refs = {
   backdropEl: document.querySelector('.backdrop-film'),
   modalFilm: document.querySelector('.modal-film'),
   renderModalBox: document.querySelector('.modal-render-box'),
-  filmOfLocalStoragWatched: JSON.parse(localStorage.getItem('Watched')),
-  filmOfLocalStoragQueue: JSON.parse(localStorage.getItem('Queue')),
+  filmOfLocalStorageWatched: JSON.parse(localStorage.getItem('Watched')),
+  filmOfLocalStorageQueue: JSON.parse(localStorage.getItem('Queue')),
   headerOnMainPage: document.querySelector('.header'),
-  bodyEl: document.querySelector("body"),
+  bodyEl: document.querySelector('body'),
   headerOnMyLibraryPage: document.querySelector('.my-library-header'),
-  myLibraryBtnList: document.querySelector('.buttons-list')
+  myLibraryBtnList: document.querySelector('.buttons-list'),
+  miLibraryHeader: document.querySelector('.gallery-title'),
 };
