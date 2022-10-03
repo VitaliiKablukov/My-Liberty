@@ -3,7 +3,7 @@ import Notiflix from 'notiflix';
 
 let addFilm = {};
 let filmId = Number;
-
+let selectedFilm = [];
 export let settingRenderModalBtn = {
   nameWatchedBtn: 'add to Watched',
   nameQueueBtn: 'add to queue',
@@ -11,6 +11,12 @@ export let settingRenderModalBtn = {
 
 let optionsStorage = {
   category: '',
+};
+
+const optionNotiflix = {
+  width: '400px',
+  cssAnimationStyle: 'from-right',
+  position: 'right-bottom',
 };
 
 export async function addFilmToLocalStorage(filmForModal, id) {
@@ -30,71 +36,68 @@ function onModalBtn(e) {
   let el = e.target;
   let filmOfStorageWatched = JSON.parse(localStorage.getItem('Watched'));
   let filmOfStorageQueue = JSON.parse(localStorage.getItem('Queue'));
-  console.log(filmOfStorageWatched);
 
   if (el.textContent === 'add to Watched') {
     optionsStorage.category = 'Watched';
 
-    let selectedWachedFilm = filmOfStorageWatched;
-
-    if (selectedWachedFilm !== null) {
-      selectedWachedFilm.push(addFilm);
-      addFilmToLibrary(optionsStorage, selectedWachedFilm);
-    } else {
-      selectedWachedFilm = [];
-      selectedWachedFilm.push(addFilm);
-      addFilmToLibrary(optionsStorage, selectedWachedFilm);
-    }
-
+    addFilmToSelectedFilm(optionsStorage, filmOfStorageWatched);
     el.textContent = `remove for Watched`;
+    settingRenderModalBtn.nameWatchedBtn = 'remove for Watched';
+  } else if (el.textContent === 'remove for Watched') {
+    optionsStorage.category = 'Watched';
+
+    removeFilmFromLibrary(optionsStorage, filmOfStorageWatched);
+    el.textContent = 'add to Watched';
+    settingRenderModalBtn.nameWatchedBtn = 'add to Watched';
   }
+
   if (el.textContent === 'add to queue') {
     optionsStorage.category = 'Queue';
 
-    let selectedQueueFilm = filmOfStorageQueue;
-
-    if (selectedQueueFilm !== null) {
-      selectedQueueFilm.push(addFilm);
-      addFilmToLibrary(optionsStorage, selectedQueueFilm);
-    } else {
-      selectedQueueFilm = [];
-      selectedQueueFilm.push(addFilm);
-      addFilmToLibrary(optionsStorage, selectedQueueFilm);
-    }
+    addFilmToSelectedFilm(optionsStorage, filmOfStorageQueue);
 
     el.textContent = `remove for queue`;
-  }
-
-  if (el.textContent === 'remove for Watched') {
-    optionsStorage.category = 'Watched';
-    const storage = refs.filmOfLocalStorageWatched;
-    const findRemuveIndex = storage
-      .map(film => film.film.id)
-      .findIndex(id => id === filmId);
-    const removeStorage = filmOfStorageWatched.splice(findRemuveIndex, 1);
-    addFilmToLibrary(optionsStorage, filmOfStorageWatched);
-    el.textContent = 'add to Watched';
-  }
-
-  if (el.textContent === 'remove for queue') {
+    settingRenderModalBtn.nameQueueBtn = 'remove for queue';
+  } else if (el.textContent === 'remove for queue') {
     optionsStorage.category = 'Queue';
-    const storage = refs.filmOfLocalStorageQueue;
-    const findRemuveIndex = storage
-      .map(film => film.film.id)
-      .findIndex(id => id === filmId);
-    const removeStorage = filmOfStorageQueue.splice(findRemuveIndex, 1);
-    addFilmToLibrary(optionsStorage, filmOfStorageQueue);
+
+    removeFilmFromLibrary(optionsStorage, filmOfStorageQueue);
     el.textContent = 'add to queue';
+    settingRenderModalBtn.nameQueueBtn = 'add to queue';
   }
 }
 
-function addFilmToLibrary({ category }, selectedFilm) {
+function addFilmToSelectedFilm({ category }, selectedFilm) {
+  if (selectedFilm !== null) {
+    selectedFilm.push(addFilm);
+    addFilmToLibrary(category, selectedFilm);
+  } else {
+    selectedFilm = [];
+    selectedFilm.push(addFilm);
+    addFilmToLibrary(category, selectedFilm);
+  }
+}
+
+function addFilmToLibrary(category, selectedFilm) {
   try {
     localStorage.setItem(`${category}`, JSON.stringify(selectedFilm));
-    Notiflix.Notify.success(`Movie successfully added to ${category}`);
+    messageNotiflixSuccesAdd(category);
   } catch (error) {
-    Notiflix.Notify.failure(`Sorry, failed to add movie to ${category}`);
-    return;
+    messageNotiflixFailureAdd(category);
+  }
+}
+
+function removeFilmFromLibrary({ category }, remainFilm) {
+  console.log(category);
+  try {
+    const findRemuveIndex = remainFilm
+      .map(film => film.film.id)
+      .findIndex(id => id === filmId);
+    remainFilm.splice(findRemuveIndex, 1);
+    localStorage.setItem(`${category}`, JSON.stringify(remainFilm));
+    messageNotiflixSuccesRemove(category);
+  } catch (error) {
+    messageNotiflixFailureRemove(category);
   }
 }
 
@@ -134,17 +137,30 @@ export async function checkRepeatFilm(
   }
 }
 
-// function removeFilmFromLibrary({ category }, addFilm) {
-//   console.log(addFilm.film.id);
-//   try {
-//     localStorage.removeItem(`${category}`);
-//     Notiflix.Notify.success(`Movie successfully remove from ${category}`);
-//     el.textContent = `add to ${category}`;
-//   } catch (error) {
-//     Notiflix.Notify.failure(`Sorry, failed to remove movie from ${category}`);
-//     return;
-//   }
-// }
+function messageNotiflixSuccesAdd(category) {
+  Notiflix.Notify.success(
+    `Movie successfully added to ${category}`,
+    optionNotiflix
+  );
+}
 
-// localStorage.removeItem('Watched');
-// localStorage.removeItem('Queue');
+function messageNotiflixFailureAdd(category) {
+  Notiflix.Notify.failure(
+    `Sorry, failed to add movie to ${category}`,
+    optionNotiflix
+  );
+}
+
+function messageNotiflixSuccesRemove(category) {
+  Notiflix.Notify.success(
+    `Movie successfully remove from ${category}`,
+    optionNotiflix
+  );
+}
+
+function messageNotiflixFailureRemove(category) {
+  Notiflix.Notify.failure(
+    `Sorry, failed to remove movie from ${category}`,
+    optionNotiflix
+  );
+}
