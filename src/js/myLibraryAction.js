@@ -2,7 +2,7 @@ import Notiflix from "notiflix"
 import { refs } from "./refs"
 import { createMarkupMyLibrary } from "./render-gallery"
 
-import { getWatchedWithPagination, getQueueWithPagination, renderBlockEmpty} from "./pagination"
+import { getWatchedWithPagination, getQueueWithPagination, renderBlockEmpty, removeBlockEmpty} from "./pagination"
 
 export function noFilm() {
     Notiflix.Notify.info('No films in this colection Queue', {
@@ -21,8 +21,9 @@ export function btnLogicsMyLibrary(e) {
         changeBtnClass(e.target)
 
         if (refs.filmOfLocalStorageWatched) {
-            
-            getWatchedWithPagination(refs.filmOfLocalStorageWatched.length, page=1); 
+            let page = 1;
+            removeBlockEmpty();
+            getWatchedWithPagination(refs.filmOfLocalStorageWatched.length, page); 
         } else {
             Notiflix.Notify.info('No films in this colection Watched', {
                 position: 'right-bottom'
@@ -36,8 +37,9 @@ export function btnLogicsMyLibrary(e) {
         changeBtnClass(e.target)
 
         if (refs.filmOfLocalStorageQueue) {
-            
-            getQueueWithPagination(refs.filmOfLocalStorageQueue.length, page=1); 
+            let page = 1;
+            removeBlockEmpty();
+            getQueueWithPagination(refs.filmOfLocalStorageQueue.length, page); 
 
         } else {
 

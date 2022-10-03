@@ -27,7 +27,7 @@ export async function addFilmToLocalStorage(filmForModal, id) {
 function addEventListenerBtn(filmForModal, id) {
   addFilm.film = filmForModal;
   filmId = Number(id);
-  console.log(filmId);
+  // console.log(filmId);
   refs.modalBtn.addEventListener('click', onModalBtn);
   return filmId;
 }
@@ -133,7 +133,7 @@ export async function checkRepeatFilm(
     if (checkResultQueue === undefined) {
       settingRenderModalBtn.nameQueueBtn = 'add to queue';
     }
-    console.log(checkResultQueue);
+    // console.log(checkResultQueue);
   }
 }
 

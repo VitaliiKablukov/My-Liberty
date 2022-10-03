@@ -13,7 +13,7 @@ import { getTrendingFilms, getSearchWithPagination } from './search_film';
     
      refs.gallery.innerHTML = '';
    let page = event.target.getAttribute('id');
-   console.log('PaginateBtnClick id', page);
+  //  console.log('PaginateBtnClick id', page);
      if (refs.paginationList.classList.contains('pagination-popular')) {
          getPopularInLoadStartPage(page);
      } else if (refs.paginationList.classList.contains('pagination-search')) {
@@ -99,7 +99,7 @@ export async function getPopularInLoadStartPage(page) {
     }
 
     displayPagination(max_page, page);
-    // refs.pagination.addEventListener('click', onPaginateBtnClick);
+    
     renderHomePageGallery(page);
   }
 
@@ -123,7 +123,7 @@ export function getWatchedWithPagination(maxFilms, page) {
 
   if (maxFilms <= totalFilmsInPage) {
     refs.paginationList.innerHTML = '';
-    console.log('недостатня кількість фільмів для пагінації Watched');
+    // console.log('недостатня кількість фільмів для пагінації Watched');
     return;
   } 
     refs.paginationList.innerHTML = '';
@@ -148,7 +148,7 @@ export function getQueueWithPagination(maxFilms, page) {
   if (page > totalFilmsPages) return;
   if (maxFilms <= totalFilmsInPage) {
     refs.paginationList.innerHTML = ''; 
-    console.log('недостатня кількість фільмів для пагінації Queue');
+    // console.log('недостатня кількість фільмів для пагінації Queue');
     return;
   } 
   refs.paginationList.innerHTML = '';
@@ -219,4 +219,11 @@ export function renderBlockEmpty() {
     refs.miLibraryHeader.classList.remove('is-hidden');
     refs.paginationList.innerHTML = '';
     refs.gallerySection.classList.add('ukraine');
+}
+export function removeBlockEmpty() {
+  if (refs.gallerySection.classList.contains('ukraine')) {
+    refs.gallerySection.classList.remove('ukraine');
+    refs.miLibraryHeader.classList.add('is-hidden');
+  }
+  return;
 }
