@@ -20,7 +20,6 @@ export async function renderModal(event) {
   const genresFilm = Object.values(filmForModal.genres)[0]
     ? Object.values(filmForModal.genres)[0].name
     : '';
-
   const modalLayout = `<div class="img-box"><img class="film_modal_img" src="${IMG_URL}${
     filmForModal.poster_path
   }" alt="${filmForModal.original_title}" /></div>
