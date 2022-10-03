@@ -3,7 +3,10 @@ import Notiflix from 'notiflix';
 
 let addFilm = {};
 let filmId = Number;
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 export let settingRenderModalBtn = {
   nameWatchedBtn: 'add to Watched',
   nameQueueBtn: 'add to queue',
