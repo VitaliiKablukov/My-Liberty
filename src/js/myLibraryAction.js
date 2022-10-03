@@ -2,13 +2,13 @@ import Notiflix from "notiflix"
 import { refs } from "./refs"
 import { createMarkupMyLibrary } from "./render-gallery"
 
-import { getWatchedWithPagination, getQueueWithPagination } from "./pagination"
+import { getWatchedWithPagination, getQueueWithPagination, renderBlockEmpty} from "./pagination"
 
 export function noFilm() {
     Notiflix.Notify.info('No films in this colection Queue', {
         position: 'right-bottom'
     })
-
+    renderBlockEmpty();
 }
 
 export function btnLogicsMyLibrary(e) {
@@ -20,13 +20,14 @@ export function btnLogicsMyLibrary(e) {
 
         changeBtnClass(e.target)
 
-        if (refs.filmOfLocalStoragWatched) {
-            // createMarkupMyLibrary(refs.filmOfLocalStoragWatched)
-            getWatchedWithPagination(refs.filmOfLocalStoragWatched.length, page=1); 
+        if (refs.filmOfLocalStorageWatched) {
+            
+            getWatchedWithPagination(refs.filmOfLocalStorageWatched.length, page=1); 
         } else {
             Notiflix.Notify.info('No films in this colection Watched', {
                 position: 'right-bottom'
-            })
+            });
+            renderBlockEmpty();
         }
 
     }
@@ -34,16 +35,16 @@ export function btnLogicsMyLibrary(e) {
         refs.gallery.innerHTML = ""
         changeBtnClass(e.target)
 
-        if (refs.filmOfLocalStoragQueue) {
-            // createMarkupMyLibrary(refs.filmOfLocalStoragQueue)
-            getQueueWithPagination(refs.filmOfLocalStoragQueue.length, page=1); 
+        if (refs.filmOfLocalStorageQueue) {
+            
+            getQueueWithPagination(refs.filmOfLocalStorageQueue.length, page=1); 
 
         } else {
 
             Notiflix.Notify.info('No films in this colection Queue', {
                 position: 'right-bottom'
-            })
-
+            });
+            renderBlockEmpty();
 
         }
     }

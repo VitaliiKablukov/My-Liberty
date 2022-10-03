@@ -19,9 +19,9 @@ import { getTrendingFilms, getSearchWithPagination } from './search_film';
      } else if (refs.paginationList.classList.contains('pagination-search')) {
          getSearchWithPagination(page);
      } else if (refs.paginationList.classList.contains('pagination-watched')) {
-        getWatchedWithPagination(refs.filmOfLocalStoragWatched.length, page);
+        getWatchedWithPagination(refs.filmOfLocalStorageWatched.length, page);
      }else  if(refs.paginationList.classList.contains('pagination-queue')){
-        getQueueWithPagination(refs.filmOfLocalStoragQueue.length, page);
+       getQueueWithPagination(refs.filmOfLocalStorageQueue.length, page);
     }
   };
 
@@ -115,7 +115,7 @@ export function getWatchedWithPagination(maxFilms, page) {
   
   let totalFilmsInPage = 9;
   let totalFilmsPages = Math.ceil(maxFilms / totalFilmsInPage);
-  let arrData = refs.filmOfLocalStoragWatched;
+  let arrData = refs.filmOfLocalStorageWatched;
   
    displayListFilms(arrData, totalFilmsInPage, page);  
 
@@ -141,7 +141,7 @@ export function getQueueWithPagination(maxFilms, page) {
     
   let totalFilmsInPage = 9;
   let totalFilmsPages = Math.ceil(maxFilms / totalFilmsInPage);
-  let arrData = refs.filmOfLocalStoragQueue;
+  let arrData = refs.filmOfLocalStorageQueue;
   // arrData = [];//test
   displayListFilms(arrData, totalFilmsInPage, page);
 
@@ -212,11 +212,11 @@ function displayListFilms(arrData, totalFilmsInPage, page) {
   // console.log('відпрацювала функція displayListFilms');
 }
 
-function renderBlockEmpty() {
- 
-    let gallerySection = document.querySelector('.gallery');
-    const template = `<h2>Movies create the mood! Choose your mood!</h2>`;
-    refs.gallery.insertAdjacentHTML('beforebegin', `${template}`);
-  refs.paginationList.innerHTML = '';
-  gallerySection.classList.add('ukraine');
+export function renderBlockEmpty() {
+    
+  if (!refs.miLibraryHeader.classList.contains('is-hidden')) return;
+    refs.miLibraryHeader.innerText = 'Movies create the mood! Choose your mood!';
+    refs.miLibraryHeader.classList.remove('is-hidden');
+    refs.paginationList.innerHTML = '';
+    refs.gallerySection.classList.add('ukraine');
 }

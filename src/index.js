@@ -32,8 +32,8 @@ if (refs.headerOnMainPage) {
   refs.paginationList.addEventListener('click', onPaginateBtnClick);
 }
 if (refs.headerOnMyLibraryPage) {
-  if (refs.filmOfLocalStoragWatched) {
-    createMarkupMyLibrary(refs.filmOfLocalStoragWatched);
+  if (refs.filmOfLocalStorageWatched) {
+    createMarkupMyLibrary(refs.filmOfLocalStorageWatched);
   } else {
     noFilm();
   }

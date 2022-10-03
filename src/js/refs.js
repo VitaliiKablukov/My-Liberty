@@ -23,4 +23,5 @@ export let refs = {
   myLibraryBtnList: document.querySelector('.buttons-list'),
   miLibraryHeader: document.querySelector('.gallery-title'),
   searchField: document.querySelector('.search-field'),
+  gallerySection: document.querySelector('.gallery'),
 };
