@@ -5,7 +5,7 @@ export let refs = {
   paginationList: document.querySelector('.pagination-list'),
   paginationSearch: document.querySelector('.pagination-search'),
   paginationWatched: document.querySelector('.pagination-watched'), //не видаляти - це заготовка для пагінаціі на сторінці watched
-  paginationQueue: document.querySelector('.pagination-queue'),//не видаляти  - це заготовка для пагінаціі на сторінці queue
+  paginationQueue: document.querySelector('.pagination-queue'), //не видаляти  - це заготовка для пагінаціі на сторінці queue
   searchButton: document.querySelector('.search-button'),
   searchErrorNotification: document.querySelector('.search-box-notification'),
   signInButton: document.querySelector('.js-nav__btn--signIn'),
@@ -22,4 +22,5 @@ export let refs = {
   headerOnMyLibraryPage: document.querySelector('.my-library-header'),
   myLibraryBtnList: document.querySelector('.buttons-list'),
   miLibraryHeader: document.querySelector('.gallery-title'),
+  searchField: document.querySelector('.search-field'),
 };
