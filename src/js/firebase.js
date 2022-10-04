@@ -20,13 +20,17 @@ refs.signOutButton.addEventListener('click', signOut);
 
 emailVeriying();
 
+export async function checkingSigningForModalButtons() {
+  const userVerified = JSON.parse(localStorage.getItem('user'));
+  return userVerified;
+}
+
 function emailVeriying() {
   const userVerified = JSON.parse(localStorage.getItem('user'));
   if (userVerified) {
     refs.myLibraryNavLink.classList.remove('visually-hidden');
     refs.signOutButton.classList.remove('visually-hidden');
     refs.signInButton.classList.add('visually-hidden');
-    console.log(userVerified);
   }
 }
 
