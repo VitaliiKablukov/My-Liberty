@@ -24,4 +24,5 @@ export let refs = {
   miLibraryHeader: document.querySelector('.gallery-title'),
   searchField: document.querySelector('.search-field'),
   gallerySection: document.querySelector('.gallery'),
+  btnScrollToTop: document.querySelector('.scrollToTopBtn')
 };

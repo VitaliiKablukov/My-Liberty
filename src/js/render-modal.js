@@ -20,9 +20,8 @@ export async function renderModal(event) {
   const genresFilm = Object.values(filmForModal.genres)[0]
     ? Object.values(filmForModal.genres)[0].name
     : '';
-  const modalLayout = `<div class="img-box"><img class="film_modal_img" src="${IMG_URL}${
-    filmForModal.poster_path
-  }" alt="${filmForModal.original_title}" /></div>
+  const modalLayout = `<div class="img-box"><img class="film_modal_img" src="${IMG_URL}${filmForModal.poster_path
+    }" alt="${filmForModal.original_title}" /></div>
     <div class="modal__content">
       <h1 class="film_modal_title">${filmForModal.title}</h1>
       <ul class="film_info_list">
@@ -33,8 +32,8 @@ export async function renderModal(event) {
           <p class="film_item_category">Genre </p></li>
           <li class="film_info_item">
             <p class="film_item_parameters"><span>${filmForModal.vote_average.toFixed(
-              1
-            )}</span> / ${filmForModal.vote_count}</p>
+      1
+    )}</span> / ${filmForModal.vote_count}</p>
             <p class="film_item_parameters">${filmForModal.popularity}</p>
             <p class="film_item_parameters">${filmForModal.original_title}</p>
             <p class="film_item_parameters">${genresFilm}</p>
@@ -58,12 +57,16 @@ refs.backdropEl.addEventListener('click', onBackdropClose);
 
 function stopScrollWhenModalOpen() {
   refs.bodyEl.style.overflowY = 'hidden';
+  refs.btnScrollToTop.style.display = "none";
+
 }
 
 function onModalButtonClose() {
   refs.backdropEl.classList.add('is-hidden');
   refs.renderModalBox.innerHTML = '';
   refs.bodyEl.style.overflowY = 'visible';
+  refs.btnScrollToTop.style.display = "block";
+
 }
 
 function onEscClose(event) {
