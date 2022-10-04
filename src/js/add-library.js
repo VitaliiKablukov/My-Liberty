@@ -55,21 +55,25 @@ function onWatchBtn(e) {
   let el = e.target;
 
   if (el.classList.contains('active')) {
-    filmOfStorageWatched = JSON.parse(localStorage.getItem(`Watched`));
-    removeFilmFromLibrary(`Watched`, filmOfStorageWatched);
+    refs.filmOfLocalStorageWatched = JSON.parse(
+      localStorage.getItem(`Watched`)
+    );
+    removeFilmFromLibrary(`Watched`, refs.filmOfLocalStorageWatched);
     textModalBtn(filmId);
   } else {
-    filmOfStorageWatched = JSON.parse(localStorage.getItem(`Watched`));
-    filmOfStorageQueue = JSON.parse(localStorage.getItem(`Queue`));
+    refs.filmOfLocalStorageWatched = JSON.parse(
+      localStorage.getItem(`Watched`)
+    );
+    refs.filmOfLocalStorageQueue = JSON.parse(localStorage.getItem(`Queue`));
 
-    addFilmToSelectedFilm(`Watched`, filmOfStorageWatched);
+    addFilmToSelectedFilm(`Watched`, refs.filmOfLocalStorageWatched);
 
-    if (filmOfStorageQueue !== null) {
-      const checkResult = filmOfStorageQueue.find(
+    if (refs.filmOfLocalStorageQueue !== null) {
+      const checkResult = refs.filmOfLocalStorageQueue.find(
         film => film.film.id === Number(filmId)
       );
       if (checkResult !== undefined) {
-        removeFilmFromLibrary(`Queue`, filmOfStorageQueue);
+        removeFilmFromLibrary(`Queue`, refs.filmOfLocalStorageQueue);
       }
     }
     textModalBtn(filmId);
@@ -80,20 +84,22 @@ function onQueuelBtn(e) {
   let el = e.target;
 
   if (el.classList.contains('active')) {
-    filmOfStorageQueue = JSON.parse(localStorage.getItem(`Queue`));
-    removeFilmFromLibrary(`Queue`, filmOfStorageQueue);
+    refs.filmOfLocalStorageQueue = JSON.parse(localStorage.getItem(`Queue`));
+    removeFilmFromLibrary(`Queue`, refs.filmOfLocalStorageQueue);
     textModalBtn(filmId);
   } else {
-    filmOfStorageWatched = JSON.parse(localStorage.getItem(`Watched`));
-    filmOfStorageQueue = JSON.parse(localStorage.getItem(`Queue`));
+    refs.filmOfLocalStorageWatched = JSON.parse(
+      localStorage.getItem(`Watched`)
+    );
+    refs.filmOfLocalStorageQueue = JSON.parse(localStorage.getItem(`Queue`));
 
-    addFilmToSelectedFilm(`Queue`, filmOfStorageQueue);
-    if (filmOfStorageWatched !== null) {
-      const checkResult = filmOfStorageWatched.find(
+    addFilmToSelectedFilm(`Queue`, refs.filmOfLocalStorageQueue);
+    if (refs.filmOfLocalStorageWatched !== null) {
+      const checkResult = refs.filmOfLocalStorageWatched.find(
         film => film.film.id === Number(filmId)
       );
       if (checkResult !== undefined) {
-        removeFilmFromLibrary(`Watched`, filmOfStorageWatched);
+        removeFilmFromLibrary(`Watched`, refs.filmOfLocalStorageWatched);
       }
     }
 
