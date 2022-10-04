@@ -1,3 +1,4 @@
+
 (() => {
   const refs = {
     openModalBtn: document.querySelector('[data-footer-modal-open]'),
@@ -6,6 +7,8 @@
     backdrop: document.querySelector('[data-footer-backdrop]'),
     body: document.querySelector('body'),
     footerBackdrop: document.querySelector('.footer-backdrop'),
+    btnScrollToTop: document.querySelector('.scrollToTopBtn')
+
   };
 
   refs.openModalBtn.addEventListener('click', toggleModal);
@@ -15,10 +18,13 @@
     refs.backdrop.classList.toggle('is-hidden');
     refs.modal.classList.toggle('is-hidden');
     if (!refs.footerBackdrop.classList.contains('is-hidden')) {
-      refs.body.classList.add('no-scroll');
+      refs.body.style.overflowY = 'hidden';
+      refs.btnScrollToTop.style.display = "none";
     }
     if (refs.footerBackdrop.classList.contains('is-hidden')) {
-      refs.body.classList.remove('no-scroll');
+      refs.body.style.overflowY = 'visible';
+      refs.btnScrollToTop.style.display = "block";
+
     }
   }
 })();
