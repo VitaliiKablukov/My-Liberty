@@ -25,7 +25,7 @@ async function textModalBtn(id) {
   const watchBtn = document.querySelector('.btn__watch');
   const queueBtn = document.querySelector('.btn__queue');
 
-<<<<<<< Updated upstream
+
   console.dir(watchBtn);
   if (inList(id, 'Watched') !== undefined) {
     function changeText() {
@@ -35,13 +35,13 @@ async function textModalBtn(id) {
     }
     setTimeout(changeText, 250);
   } else {
-=======
+
   if (inList(id, 'Watched')) {
     setTimeout(() => {
       changeText(watchBtn);
     }, 250);
   } else if (!inList(id, 'Watched')) {
->>>>>>> Stashed changes
+
     watchBtn.textContent = 'Add to watched';
     watchBtn.classList.remove('active');
   }
