@@ -10,6 +10,11 @@ const optionNotiflix = {
   position: 'right-bottom',
 };
 
+function changeText(btn) {
+  btn.textContent = 'Remove for queue';
+  btn.classList.add('active');
+}
+
 export async function addEventListenerBtn(filmForModal, id) {
   addFilm.film = filmForModal;
   filmId = Number(id);
@@ -20,6 +25,7 @@ async function textModalBtn(id) {
   const watchBtn = document.querySelector('.btn__watch');
   const queueBtn = document.querySelector('.btn__queue');
 
+<<<<<<< Updated upstream
   console.dir(watchBtn);
   if (inList(id, 'Watched') !== undefined) {
     function changeText() {
@@ -29,22 +35,24 @@ async function textModalBtn(id) {
     }
     setTimeout(changeText, 250);
   } else {
+=======
+  if (inList(id, 'Watched')) {
+    setTimeout(() => {
+      changeText(watchBtn);
+    }, 250);
+  } else if (!inList(id, 'Watched')) {
+>>>>>>> Stashed changes
     watchBtn.textContent = 'Add to watched';
     watchBtn.classList.remove('active');
-    watchBtn.disabled = false;
   }
 
-  if (inList(id, 'Queue') !== undefined) {
-    function changeText() {
-      queueBtn.disabled = false;
-      queueBtn.textContent = 'Remove for queue';
-      queueBtn.classList.add('active');
-    }
-    setTimeout(changeText, 250);
+  if (inList(id, 'Queue')) {
+    setTimeout(() => {
+      changeText(queueBtn);
+    }, 250);
   } else {
     queueBtn.textContent = 'Add to queue';
     queueBtn.classList.remove('active');
-    queueBtn.disabled = false;
   }
 
   watchBtn.addEventListener('click', onWatchBtn);
@@ -59,7 +67,7 @@ function onWatchBtn(e) {
       localStorage.getItem(`Watched`)
     );
     removeFilmFromLibrary(`Watched`, refs.filmOfLocalStorageWatched);
-    textModalBtn(filmId);
+    changeText(btnWatch);
   } else {
     refs.filmOfLocalStorageWatched = JSON.parse(
       localStorage.getItem(`Watched`)
@@ -176,6 +184,8 @@ function inList(id, category) {
   let LocalStorage = JSON.parse(localStorage.getItem(`${category}`));
   if (LocalStorage !== null) {
     const checkResult = LocalStorage.find(film => film.film.id === Number(id));
-    return checkResult;
+    return true;
+  } else {
+    return false;
   }
 }
