@@ -38,6 +38,8 @@
     refs.footerBackdrop.classList.add('is-hidden');
     refs.modal.classList.add('is-hidden');
     refs.footerBackdrop.removeEventListener('click', closeModal)
+    refs.body.style.overflowY = 'visible';
+    refs.btnScrollToTop.style.display = "block";
     window.removeEventListener('keydown', closeModalEsc)
   }
   function closeModalEsc(e) {
