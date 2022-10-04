@@ -39,7 +39,7 @@
   color: $text-color-h;
   display: flex;
   flex-direction: column;
-  align-items: center;
+//   align-items: center;
 
   @media screen and (max-width: 767px) {
     &:nth-child(n + 2) {
