@@ -20,11 +20,34 @@
     if (!refs.footerBackdrop.classList.contains('is-hidden')) {
       refs.body.style.overflowY = 'hidden';
       refs.btnScrollToTop.style.display = "none";
+      refs.footerBackdrop.addEventListener('click', closeModal)
+      window.addEventListener('keydown', closeModalEsc)
+
     }
     if (refs.footerBackdrop.classList.contains('is-hidden')) {
+      // refs.backdrop.removeEventListener('click', closeModal)
       refs.body.style.overflowY = 'visible';
       refs.btnScrollToTop.style.display = "block";
+      refs.footerBackdrop.removeEventListener('click', closeModal)
+      window.removeEventListener('keydown', closeModalEsc)
+
+    }
+  }
+
+  function closeModal() {
+    refs.footerBackdrop.classList.add('is-hidden');
+    refs.modal.classList.add('is-hidden');
+    refs.footerBackdrop.removeEventListener('click', closeModal)
+    window.removeEventListener('keydown', closeModalEsc)
+  }
+  function closeModalEsc(e) {
+    if (e.code === 'Escape') {
+      closeModal()
 
     }
   }
 })();
+
+
+
+
