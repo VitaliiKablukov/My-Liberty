@@ -10,8 +10,8 @@ const optionNotiflix = {
   position: 'right-bottom',
 };
 
-function changeText(btn) {
-  btn.textContent = 'Remove for queue';
+function changeText(btn, list) {
+  btn.textContent = `Remove for ${list}`;
   btn.classList.add('active');
 }
 
@@ -24,31 +24,17 @@ export async function addEventListenerBtn(filmForModal, id) {
 async function textModalBtn(id) {
   const watchBtn = document.querySelector('.btn__watch');
   const queueBtn = document.querySelector('.btn__queue');
-
-
-  console.dir(watchBtn);
-  if (inList(id, 'Watched') !== undefined) {
-    function changeText() {
-      watchBtn.disabled = false;
-      watchBtn.textContent = 'Remove for watched';
-      watchBtn.classList.add('active');
-    }
-    setTimeout(changeText, 250);
-  } else {
-
-  if (inList(id, 'Watched')) {
+  if (!inList(id, 'Watched')) {
     setTimeout(() => {
-      changeText(watchBtn);
+      changeText(watchBtn, 'watched');
     }, 250);
-  } else if (!inList(id, 'Watched')) {
-
+  } else {
     watchBtn.textContent = 'Add to watched';
     watchBtn.classList.remove('active');
   }
-
-  if (inList(id, 'Queue')) {
+  if (!inList(id, 'Queue')) {
     setTimeout(() => {
-      changeText(queueBtn);
+      changeText(queueBtn, 'queue');
     }, 250);
   } else {
     queueBtn.textContent = 'Add to queue';
@@ -67,11 +53,12 @@ function onWatchBtn(e) {
       localStorage.getItem(`Watched`)
     );
     removeFilmFromLibrary(`Watched`, refs.filmOfLocalStorageWatched);
-    changeText(btnWatch);
+    textModalBtn(filmId);
   } else {
     refs.filmOfLocalStorageWatched = JSON.parse(
       localStorage.getItem(`Watched`)
     );
+
     refs.filmOfLocalStorageQueue = JSON.parse(localStorage.getItem(`Queue`));
 
     addFilmToSelectedFilm(`Watched`, refs.filmOfLocalStorageWatched);
@@ -137,7 +124,6 @@ function addFilmToLibrary(category, selectedFilm) {
 }
 
 function removeFilmFromLibrary(category, remainFilm) {
-  console.log(category);
   try {
     const findRemuveIndex = remainFilm
       .map(film => film.film.id)
@@ -184,8 +170,12 @@ function inList(id, category) {
   let LocalStorage = JSON.parse(localStorage.getItem(`${category}`));
   if (LocalStorage !== null) {
     const checkResult = LocalStorage.find(film => film.film.id === Number(id));
-    return true;
+    if (checkResult === undefined) {
+      return true;
+    } else {
+      return false;
+    }
   } else {
-    return false;
+    return true;
   }
 }
