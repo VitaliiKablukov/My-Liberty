@@ -2,6 +2,7 @@ import axios from 'axios';
 import { IMG_URL, API_KEY, SEARCH_URL } from './constats';
 import { refs } from './refs';
 import { addEventListenerBtn } from './add-library';
+import { checkingSigningForModalButtons } from './firebase';
 
 export async function renderModal(event) {
   event.preventDefault();
@@ -42,14 +43,24 @@ export async function renderModal(event) {
       <h2 class="modal_about_head">About</h2>
       <p class="modal_about_text">${filmForModal.overview}</p>
       <ul class="modal_btn_list">
-          <li class="modal_btn_item"><button class="modal_btn btn__watch" type="button" data-id="${itemId}">Add to watched</button></li>
-          <li class="modal_btn_item"><button class="modal_btn btn__queue" type="button" data-id="${itemId}">Add to queue</button></li>
+          <li class="modal_btn_item"><button class="modal_btn btn__watch" type="button" data-id="${itemId}" disabled>Add to watched</button></li>
+          <li class="modal_btn_item"><button class="modal_btn btn__queue" type="button" data-id="${itemId}" disabled>Add to queue</button></li>
       </ul>
     </div>`;
 
   refs.renderModalBox.insertAdjacentHTML('beforeend', modalLayout);
 
   addEventListenerBtn(filmForModal, itemId);
+
+  await checkingSigningForModalButtons().then(result => {
+    const modalButtonWatched = document.querySelector('.btn__watch');
+    const modalButtonQueue = document.querySelector('.btn__queue');
+
+    if (result) {
+      modalButtonWatched.removeAttribute('disabled');
+      modalButtonQueue.removeAttribute('disabled');
+    }
+  });
 }
 
 refs.buttonModalClose.addEventListener('click', onModalButtonClose);
